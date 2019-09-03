@@ -1,0 +1,11 @@
+.tabber{
+    height: 50px;
+    background: none;
+    border-top: 1px solid #D9D9D9;
+}
+.tabber .mint-tab-item-icon{
+    margin-bottom: 0px;
+}
+.mint-tabbar > .mint-tab-item.is-selected{
+    background-color: #fff;
+}
