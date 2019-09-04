@@ -26,6 +26,11 @@ body{
 }
 a{
     text-decoration: none;
+    outline: 0;
+    color: inherit;
+}
+a, img{
+    -webkit-touch-callout: none;
 }
 *,::after,::before{
     -webkit-box-sizing: inherit;
