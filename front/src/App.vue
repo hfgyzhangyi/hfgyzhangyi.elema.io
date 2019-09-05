@@ -33,6 +33,7 @@ export default {
   },
   methods:{
     tabItemClick(event){
+      $(".is-selected").removeClass("is-selected");
       var anchors=$(event.currentTarget).parent().children("a");
       $(anchors[0]).find("img").attr("src",require("./assets/images/Tabber_1_1.png"));
       $(anchors[1]).find("img").attr("src",require("./assets/images/Tabber_2_1.png"));
@@ -47,7 +48,12 @@ export default {
       }else{
         $(event.currentTarget).find("img").attr("src",require("./assets/images/Tabber_4_2.png"));
       }
+      $(event.currentTarget).addClass("is-selected");
     }
+  },
+  mounted(){
+    $(".mint-tab-item:eq(0)").find("img").attr("src",require("./assets/images/Tabber_1_2.png"));
+    $(".mint-tab-item:eq(0)").addClass("is-selected");
   }
 }
 </script>

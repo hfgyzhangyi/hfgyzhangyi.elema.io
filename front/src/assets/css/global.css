@@ -1,4 +1,4 @@
-body,h1,h2,h3,h4,h5,h6,div,ul,li,span,i,img,input,em,dl,dt,dd{
+body,h1,h2,h3,h4,h5,h6,div,ul,li,span,i,img,input,em,dl,dt,dd,ol,button{
     margin: 0;
     padding: 0;
 }
@@ -29,11 +29,24 @@ a{
     outline: 0;
     color: inherit;
 }
-a, img{
+a,img{
     -webkit-touch-callout: none;
+}
+img{
+    max-width: 100%;
 }
 *,::after,::before{
     -webkit-box-sizing: inherit;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+}
+h1,h2,h3,h4,h5,h6,p{
+    margin: 0;
+    font-weight: 400;
+}
+button,input,select,textarea{
+    outline: 0;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
 }

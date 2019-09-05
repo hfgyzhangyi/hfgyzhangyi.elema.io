@@ -22,15 +22,180 @@
         <div class="mint-swipe foodentry">
             <div class="mint-swipe-items-wrap">
                 <div class="mint-swipe-item is-active" @touchstart="touchstart($event)" @touchmove="touchmove($event)" @touchend="touchend($event)">
-                    <router-link :to="{name:'HelloWorld'}">123</router-link>
-                    <router-link :to="{name:'HelloWorld'}">123</router-link>
-                    <router-link :to="{name:'HelloWorld'}">123</router-link>
-                    <router-link :to="{name:'HelloWorld'}">123</router-link>
-                    <router-link :to="{name:'HelloWorld'}">123</router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/1.jpg"/>
+                        </div>
+                        <span class="title">美食</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/2.jpg"/>
+                        </div>
+                        <span class="title">大牌惠吃</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/3.jpg"/>
+                        </div>
+                        <span class="title">商超便利</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/4.jpg"/>
+                        </div>
+                        <span class="title">水果</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/5.jpg"/>
+                        </div>
+                        <span class="title">医药健康</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/6.jpg"/>
+                        </div>
+                        <span class="title">浪漫鲜花</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/7.jpg"/>
+                        </div>
+                        <span class="title">跑腿代购</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/8.jpg"/>
+                        </div>
+                        <span class="title">汉堡披萨</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/9.jpg"/>
+                        </div>
+                        <span class="title">厨房生鲜</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/10.jpg"/>
+                        </div>
+                        <span class="title">甜品饮品</span>
+                    </router-link>
                 </div>
-                <div class="mint-swipe-item" @touchstart="touchstart($event)" @touchmove="touchmove($event)" @touchend="touchend($event)" style="background-color:blue;"></div>
+                <div class="mint-swipe-item" @touchstart="touchstart($event)" @touchmove="touchmove($event)" @touchend="touchend($event)">
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/11.jpg"/>
+                        </div>
+                        <span class="title">速食简餐</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/12.jpg"/>
+                        </div>
+                        <span class="title">地方小吃</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/13.jpg"/>
+                        </div>
+                        <span class="title">大牌惠吃</span>
+                    </router-link>
+                    <router-link :to="{name:'HelloWorld'}">
+                        <div class="container">
+                            <img src="../assets/images/home/14.jpg"/>
+                        </div>
+                        <span class="title">速食简餐</span>
+                    </router-link>
+                </div>
+            </div>
+            <div class="mint-swipe-indicators">
+                <div class="mint-swipe-indicator is-active"></div>
+                <div class="mint-swipe-indicator"></div>
             </div>
         </div>
+        <div class="recommend_wrap">
+            <section class="recommend_sec">
+                <div class="recommend_d1">
+                    <div class="recommend_d2">
+                        <h3 class="recommend_h3">品质套餐</h3>
+                        <div class="recommend_d3">搭配齐全吃得好</div>
+                        <div class="recommend_d4">立即抢购&nbsp;></div>
+                        <img src="../assets/images/home/15.jpg"/>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="shoplist-title" class="shoplist-title">推荐商家</div>
+        <div class="home-filter">
+            <aside class="filter" style="top: 0px;">
+                <div class="filter-header">
+                    <a href="javascript:" class="filter-nav">
+                        <span>综合排序</span>
+                        <svg viewBox="0 0 72 32" class="dropdown-icon">
+                            <path d="M36 32l36-32h-72z"></path>
+                        </svg>
+                    </a>
+                    <a href="javascript:" class="filter-nav" @click="filterNavClick($event)"><span>距离最近</span></a>
+                    <a href="javascript:" class="filter-nav" @click="filterNavClick($event)"><span>品质联盟</span></a>
+                    <a href="javascript:" class="filter-nav-more">
+                        <span>筛选</span>
+                        <svg class="filter-nav-more__icon">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#more-filter">
+                                <svg viewBox="0 0 26 26" id="more-filter" width="100%" height="100%"><path d="M9.001 15.009V23a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-7.981l7.788-10.01a1 1 0 0 0-1.578-1.228l-8 10.28a1 1 0 0 0-.21.615V22h-4v-7.324a1 1 0 0 0-.2-.6L4.001 5h14a1 1 0 0 0 0-2H2a1 1 0 0 0-.8 1.6L9 15.009z"></path></svg>
+                            </use>
+                        </svg>
+                    </a>
+                </div>
+                <section class="filter-extend filter-sort">
+                    <ul>
+                        <li class="">
+                            <span>综合排序</span>
+                            <img src="" alt="综合排序" class="selected">
+                        </li>
+                        <li class="">
+                            <span>好评优先</span>
+                            <img src="" alt="好评优先" class="selected">
+                        </li>
+                        <li class="">
+                            <span>销量最高</span>
+                            <img src="" alt="销量最高" class="selected">
+                        </li>
+                        <li class="">
+                            <span>起送价最低</span>
+                            <img src="" alt="起送价最低" class="selected">
+                        </li>
+                        <li class="">
+                            <span>配送最快</span>
+                            <img src="" alt="配送最快" class="selected">
+                        </li>
+                        <li class="">
+                            <span>配送费最低</span>
+                            <img src="" alt="配送费最低" class="selected">
+                        </li>
+                        <li class="">
+                            <span>人均从低到高</span>
+                            <img src="" alt="人均从低到高" class="selected">
+                        </li>
+                        <li class="">
+                            <span>人均从高到低</span>
+                            <img src="" alt="人均从高到低" class="selected">
+                        </li>
+                        <li class="">
+                            <span>通用排序</span>
+                            <img src="" alt="通用排序" class="selected">
+                        </li>
+                    </ul>
+                </section>
+            </aside>
+        </div>
+        <section class="NoDataTip-wrapper">
+            <img src="../assets/images/home/16.png">
+            <h3>没有结果</h3>
+            <p>登录后查看更多商家</p>
+            <button>登录</button>
+        </section>
     </div>
 </template>
 
@@ -41,13 +206,13 @@ export default {
             startPoint:0,
             disX:0,
             canDo:true,
-            clientWidth:document.body.clientWidth,
-            startTime:0,
-            test:true
+            clientWidth:0,
+            startTime:0
         }
     },
     methods:{
         touchstart:function(event){
+            this.clientWidth=document.body.clientWidth;
             if(this.canDo){
                 this.startTime=new Date().getTime();
                 this.startPoint=event.changedTouches[0].pageX;
@@ -115,9 +280,12 @@ export default {
                             if(!flag){
                                 elem2.addClass("is-active");
                                 elem1.removeClass("is-active");
+                                elem1.hide();
                             }else{
                                 elem2.hide();
                             }
+                            $(".mint-swipe-indicator.is-active").removeClass("is-active");
+                            $(".mint-swipe-indicator:eq("+$('.mint-swipe-item.is-active').index()+")").addClass("is-active");
                             _this.disX=0;
                             _this.canDo=true;
                         },ms);
@@ -134,6 +302,9 @@ export default {
                                 elem2.css("transition","all 0ms");
                                 elem2.addClass("is-active");
                                 elem1.removeClass("is-active");
+                                elem1.hide();
+                                $(".mint-swipe-indicator.is-active").removeClass("is-active");
+                                $(".mint-swipe-indicator:eq("+$('.mint-swipe-item.is-active').index()+")").addClass("is-active");
                                 _this.disX=0;
                                 _this.canDo=true;
                             },500);
@@ -149,6 +320,9 @@ export default {
                                 elem2.css("transition","all 0ms");
                                 elem2.addClass("is-active");
                                 elem1.removeClass("is-active");
+                                elem1.hide();
+                                $(".mint-swipe-indicator.is-active").removeClass("is-active");
+                                $(".mint-swipe-indicator:eq("+$('.mint-swipe-item.is-active').index()+")").addClass("is-active");
                                 _this.disX=0;
                                 _this.canDo=true;
                             },500);
@@ -156,6 +330,10 @@ export default {
                     }
                 }
             }
+        },
+        filterNavClick(event){
+            $(".active").removeClass("active");
+            $(event.currentTarget).addClass("active");
         }
     },
     created(){
@@ -319,5 +497,364 @@ export default {
     margin-top: .293333rem;
     margin-top: 2.933333vw;
     width: 20%;
+}
+.foodentry .container{
+    position: relative;
+    display: inline-block;
+    width: 1.2rem;
+    width: 12vw;
+    height: 1.2rem;
+    height: 12vw;
+}
+.foodentry .title{
+    display: block;
+    margin-top: .133333rem;
+    margin-top: 1.333333vw;
+    color: #666;
+    font-size: .32rem;
+}
+.foodentry img{
+    width: 1.066667rem;
+    width: 10.666667vw;
+    height: 1.066667rem;
+    height: 10.666667vw;
+    vertical-align: top;
+}
+.foodentry .container img{
+    width: 100%;
+    height: 100%;
+}
+.mint-swipe-indicators{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.mint-swipe-indicator{
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 100%;
+    background: #000;
+    opacity: .2;
+    margin: 0 3px;
+}
+.mint-swipe-indicator.is-active{
+    background: #fff;
+}
+.foodentry .mint-swipe-indicator{
+    margin: 0 .066667rem;
+    margin: 0 .05vw 0.5vw;
+    width: .24rem;
+    width: 3.4vw;
+    height: .04rem;
+    height: .4vw;
+    border-radius: 0;
+}
+.wrapper .mint-swipe-indicator{
+    width: .24rem;
+    width: 3.4vw;
+    height: .04rem;
+    height: .4vw;
+    border-radius: 0;
+}
+.foodentry .mint-swipe-indicator.is-active{
+    width: .24rem;
+    width: 3.4vw;
+    background-color: #00a6ff;
+}
+.foodentry .mint-swipe-indicator.is-active{
+    background-color: #00a6ff;
+}
+.foodentry .mint-swipe-indicator.is-active{
+    background-color: #fe7100;
+}
+.recommend_wrap{
+    margin-bottom: .213333rem;
+    margin-bottom: 2.133333vw;
+    font-size: 0;
+    padding: 0 .266667rem;
+    padding: 0 2.666667vw;
+}
+.recommend_sec{
+    background: #fff;
+}
+.recommend_d1{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.recommend_d1{
+    margin-bottom: .08rem;
+    margin-bottom: .8vw;
+}
+.recommend_d2{
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(5%,#f4f4f4),color-stop(95%,#fafafa));
+    background: -webkit-linear-gradient(bottom,#f4f4f4 5%,#fafafa 95%);
+    background: linear-gradient(0deg,#f4f4f4 5%,#fafafa 95%);
+}
+.recommend_d2{
+    height: 3.733333rem;
+    height: 37.333333vw;
+    padding: .32rem 0 0 .4rem;
+    padding: 3.2vw 0 0 4vw;
+    z-index: 0;
+}
+.recommend_d2{
+    height: 2.933333rem;
+    height: 29.333333vw;
+}
+.recommend_h3{
+    font-size: .453333rem;
+    font-weight: 700;
+    margin-bottom: .133333rem;
+    margin-bottom: 1.333333vw;
+    color: #333;
+}
+.recommend_d3{
+    font-size: .346667rem;
+    color: #777;
+    margin-bottom: .24rem;
+    margin-bottom: 2.4vw;
+}
+.recommend_d4{
+    font-size: .32rem;
+    color: #af8260;
+    font-weight: 700;
+}
+.recommend_d2 img{
+    position: absolute;
+    right: 0;
+    bottom: -.2rem;
+    bottom: -2vw;
+    width: 3.2rem;
+    width: 32vw;
+    height: 2.133333rem;
+    height: 21.333333vw;
+}
+.recommend_d2 img{
+    top: .24rem;
+    top: 2.4vw;
+    right: .373333rem;
+    right: 3.733333vw;
+    width: 3.76rem;
+    width: 37.6vw;
+    height: 2.506667rem;
+    height: 25.066667vw;
+}
+.shoplist, .shoplist-title{
+    background-color: #fff;
+}
+.shoplist-title{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: .96rem;
+    height: 9.6vw;
+    font-size: .4rem;
+    color: #000;
+}
+.shoplist-title:after, .shoplist-title:before{
+    display: block;
+    content: "";
+    width: .533333rem;
+    width: 5.333333vw;
+    height: .026667rem;
+    height: .266667vw;
+    background-color: #999;
+}
+.shoplist-title:before{
+    margin-right: .346667rem;
+    margin-right: 3.466667vw;
+}
+.shoplist-title:after{
+    margin-left: .346667rem;
+    margin-left: 3.466667vw;
+}
+.filter-extend{
+    left: 0;
+    right: 0;
+    top: 1.053333rem;
+    top: 10.533333vw;
+    border-top: 1px solid #ddd;
+    position: absolute;
+    max-height: 0;
+    background-color: #fff;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    visibility: hidden;
+    overflow: auto;
+    opacity: 0;
+    z-index: 4;
+}
+.filter-sort{
+    padding-top: .213333rem;
+    padding-top: 2.133333vw;
+    padding-bottom: .32rem;
+    padding-bottom: 3.2vw;
+    font-size: .373333rem;
+    color: #333;
+}
+.home-filter{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1.333rem;
+    z-index: 100;
+}
+.filter{
+    position: relative;
+    line-height: 1.04rem;
+    line-height: 10.4vw;
+    z-index: 101;
+    height: 1.066667rem;
+    height: 10.666667vw;
+}
+.filter-header{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1.053333rem;
+    height: 10.533333vw;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    z-index: 4;
+    background-color: #fff;
+}
+.filter-nav{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+    color: #666;
+    position: relative;
+    font-size: .373333rem;
+    z-index: 101;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.filter-nav .dropdown-icon{
+    width: .16rem;
+    width: 1.6vw;
+    height: .08rem;
+    height: .8vw;
+    margin-left: .133333rem;
+    margin-left: .333333vw;
+    margin-bottom: .053333rem;
+    margin-bottom: .533333vw;
+    fill: #333;
+    will-change: transform;
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s,-webkit-transform .3s;
+}
+.filter-nav-more__icon{
+    margin-left: .053333rem;
+    margin-left: .533333vw;
+    width: .346667rem;
+    width: 3.466667vw;
+    height: .346667rem;
+    height: 3.466667vw;
+    fill: #666;
+}
+.filter-nav-more{
+    width: 2.133333rem;
+    width: 21.333333vw;
+    height: 1.066667rem;
+    height: 10.666667vw;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #666;
+    font-size: .373333rem;
+    position: relative;
+}
+.filter-nav.active{
+    color: #333;
+    font-weight: 700;
+}
+.NoDataTip-wrapper{
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.NoDataTip-wrapper{
+    -webkit-flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 10vh;
+}
+.NoDataTip-wrapper img{
+    display: block;
+    width: 5.333333rem;
+    width: 53.333333vw;
+}
+.NoDataTip-wrapper h3{
+    margin: .333333rem 0 .266667rem;
+    margin: 3.333333vw 0 2.666667vw;
+    color: #6a6a6a;
+    font-weight: 400;
+    font-size: .453333rem;
+}
+.NoDataTip-wrapper p{
+    margin: 0 0 .333333rem;
+    margin: 0 0 3.333333vw;
+    color: #999;
+    font-size: .306667rem;
+}
+.NoDataTip-wrapper button{
+    padding: .266667rem;
+    padding: 2.666667vw;
+    min-width: 3.2rem;
+    min-width: 32vw;
+    border: none;
+    border-radius: .053333rem;
+    border-radius: .533333vw;
+    background-color: #56d176;
+    color: #fff;
+    text-align: center;
+    font-size: 0.4rem;
+    font-family: inherit;
 }
 </style>
