@@ -127,19 +127,20 @@
                 </div>
             </section>
         </div>
+        <div class="filtermodal" style="display: none;"></div>
         <div id="shoplist-title" class="shoplist-title">推荐商家</div>
         <div class="home-filter">
             <aside class="filter" style="top: 0px;">
                 <div class="filter-header">
-                    <a href="javascript:" class="filter-nav">
-                        <span>综合排序</span>
+                    <a href="javascript:;" class="filter-nav" @click="filterNavClick($event)">
+                        综合排序
                         <svg viewBox="0 0 72 32" class="dropdown-icon">
                             <path d="M36 32l36-32h-72z"></path>
                         </svg>
                     </a>
-                    <a href="javascript:" class="filter-nav" @click="filterNavClick($event)"><span>距离最近</span></a>
-                    <a href="javascript:" class="filter-nav" @click="filterNavClick($event)"><span>品质联盟</span></a>
-                    <a href="javascript:" class="filter-nav-more">
+                    <a href="javascript:;" class="filter-nav" @click="filterNavClick($event)"><span>距离最近</span></a>
+                    <a href="javascript:;" class="filter-nav" @click="filterNavClick($event)"><span>品质联盟</span></a>
+                    <a href="javascript:;" class="filter-nav-more">
                         <span>筛选</span>
                         <svg class="filter-nav-more__icon">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#more-filter">
@@ -150,41 +151,41 @@
                 </div>
                 <section class="filter-extend filter-sort">
                     <ul>
-                        <li class="">
+                        <li class="" @click="filterSortClick($event)">
                             <span>综合排序</span>
-                            <img src="" alt="综合排序" class="selected">
+                            <img src="../assets/images/home/17.png" alt="综合排序" class="selected">
                         </li>
-                        <li class="">
+                        <li class="" @click="filterSortClick($event)">
                             <span>好评优先</span>
-                            <img src="" alt="好评优先" class="selected">
+                            <img src="../assets/images/home/17.png" alt="好评优先" class="selected">
                         </li>
-                        <li class="">
+                        <li class="" @click="filterSortClick($event)">
                             <span>销量最高</span>
-                            <img src="" alt="销量最高" class="selected">
+                            <img src="../assets/images/home/17.png" alt="销量最高" class="selected">
                         </li>
-                        <li class="">
+                        <li class="" @click="filterSortClick($event)">
                             <span>起送价最低</span>
-                            <img src="" alt="起送价最低" class="selected">
+                            <img src="../assets/images/home/17.png" alt="起送价最低" class="selected">
                         </li>
-                        <li class="">
+                        <li class="" @click="filterSortClick($event)">
                             <span>配送最快</span>
-                            <img src="" alt="配送最快" class="selected">
+                            <img src="../assets/images/home/17.png" alt="配送最快" class="selected">
                         </li>
-                        <li class="">
+                        <li class="" @click="filterSortClick($event)">
                             <span>配送费最低</span>
-                            <img src="" alt="配送费最低" class="selected">
+                            <img src="../assets/images/home/17.png" alt="配送费最低" class="selected">
                         </li>
-                        <li class="">
+                        <li class="" @click="filterSortClick($event)">
                             <span>人均从低到高</span>
-                            <img src="" alt="人均从低到高" class="selected">
+                            <img src="../assets/images/home/17.png" alt="人均从低到高" class="selected">
                         </li>
-                        <li class="">
+                        <li class="" @click="filterSortClick($event)">
                             <span>人均从高到低</span>
-                            <img src="" alt="人均从高到低" class="selected">
+                            <img src="../assets/images/home/17.png" alt="人均从高到低" class="selected">
                         </li>
-                        <li class="">
+                        <li class="" @click="filterSortClick($event)">
                             <span>通用排序</span>
-                            <img src="" alt="通用排序" class="selected">
+                            <img src="../assets/images/home/17.png" alt="通用排序" class="selected">
                         </li>
                     </ul>
                 </section>
@@ -196,6 +197,7 @@
             <p>登录后查看更多商家</p>
             <button>登录</button>
         </section>
+        <div class="mb"></div>
     </div>
 </template>
 
@@ -207,7 +209,8 @@ export default {
             disX:0,
             canDo:true,
             clientWidth:0,
-            startTime:0
+            startTime:0,
+            isClick:false
         }
     },
     methods:{
@@ -332,11 +335,87 @@ export default {
             }
         },
         filterNavClick(event){
-            $(".active").removeClass("active");
+            //由于点击span无法渲染元素,所以只能将span标签去掉,父元素内html拼接获得,先取得svg的outerHTML
+            var svg_html=$(".filter-nav:eq(0)").children("svg").prop("outerHTML");
+            if($(event.currentTarget).index()==0){
+                //如果$(".filter-nav:eq(0)")文本等于选项li下的span文本,给选项li添加active类
+                var lis=$(".filter-sort ul li");
+                for(var li of lis){
+                    if($(li).children("span").text()==$(".filter-nav:eq(0)").text().trim()&&this.isClick){
+                        $(li).addClass("active");
+                        break;
+                    }
+                }
+                //隐藏position不是sticky的元素
+                $(".header").hide();
+                $(".mint-swipe").hide();
+                $(".recommend_wrap").hide();
+                $(".shoplist-title").hide();
+                $(".NoDataTip-wrapper").hide();
+                //打开$(".filter-sort")
+                $(".filter-sort").addClass("open");
+                //给$(".filter-nav:eq(0)")添加样式open
+                $(event.currentTarget).addClass("open");
+                //显示遮蔽层
+                $(".filtermodal").show();
+                //如果$(".filter-sort")渲染完毕点击$(".filter-nav:eq(0)")关闭$(".filter-sort")去除$(".filter-nav:eq(0)")的open类,隐藏遮蔽层
+                if($(".filter-sort").css("opacity")==1){
+                    $(".header").show();
+                    $(".mint-swipe").show();
+                    $(".recommend_wrap").show();
+                    $(".shoplist-title").show();
+                    $(".NoDataTip-wrapper").show();
+                    $(".filter-sort").removeClass("open");
+                    $(".filter-nav:eq(0)").removeClass("open");
+                    $(".filtermodal").hide();
+                }
+            }else{
+                //如果点击不是$(".filter-nav:eq(0)")则给对象加上active,并且把$(".filter-nav:eq(0)")的html内容重置
+                $(".active").removeClass("active");
+                $(event.currentTarget).addClass("active");
+                this.isClick=false;
+                $(".filter-nav:eq(0)").html("综合排序"+"&nbsp;"+svg_html);
+            }
+        },
+        filterSortClick(event){
+            var svg_html=$(".filter-nav:eq(0)").children("svg").prop("outerHTML");
+            //给点击的$(".filter-sort li")加上active类
+            $(".filter-sort li.active").removeClass("active");
             $(event.currentTarget).addClass("active");
+            //将选中的$(".filter-sort li")下的span标签文本赋给$(".filter-nav:eq(0)")
+            $(".filter-nav:eq(0)").html($(event.currentTarget).children("span").text()+"&nbsp;"+svg_html);
+            //给$(".filter-nav:eq(0)")添加active类
+            $(".active").removeClass("active");
+            $(".filter-nav:eq(0)").addClass("active");
+            //关闭$(".filter-sort"),移除$(".filter-nav:eq(0)")open类,隐藏遮蔽层
+            $(".filter-sort").removeClass("open");
+            $(".filter-nav:eq(0)").removeClass("open");
+            $(".filtermodal").hide();
+            this.isClick=true;
+            $(".header").show();
+            $(".mint-swipe").show();
+            $(".recommend_wrap").show();
+            $(".shoplist-title").show();
+            $(".NoDataTip-wrapper").show();
         }
     },
-    created(){
+    mounted(){
+        this.bodyClickListener=(e)=>{
+            //如果$(".filter-sort")是open状态
+            if($(".filter-sort").hasClass("open")){
+                $(".filter-sort").removeClass("open");
+                $(".filter-nav:eq(0)").removeClass("open");
+                $(".filtermodal").hide();
+                $(".header").show();
+                $(".mint-swipe").show();
+                $(".recommend_wrap").show();
+                $(".shoplist-title").show();
+                $(".NoDataTip-wrapper").show();
+            }
+        }
+        //第三个参数为true,捕获由外到内依次执行各级父元素上的处理函数
+        //第三个参数为false,冒泡由内到外依次执行各级父元素上的处理函数
+        document.body.addEventListener("click",this.bodyClickListener,true);
     }
 }
 </script>
@@ -703,6 +782,11 @@ export default {
     opacity: 0;
     z-index: 4;
 }
+.filter-extend.open{
+    opacity: 1;
+    visibility: visible;
+    max-height: 1500%;
+}
 .filter-sort{
     padding-top: .213333rem;
     padding-top: 2.133333vw;
@@ -710,6 +794,33 @@ export default {
     padding-bottom: 3.2vw;
     font-size: .373333rem;
     color: #333;
+}
+.filter-sort li{
+    position: relative;
+    padding-left: .533333rem;
+    padding-left: 5.333333vw;
+    line-height: 1.066667rem;
+    line-height: 10.666667vw;
+}
+.filter-sort .selected{
+    position: absolute;
+    right: .373333rem;
+    right: 3.733333vw;
+    top: 50%;
+    width: .4rem;
+    width: 4vw;
+    height: .4rem;
+    height: 4vw;
+    display: none;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.filter-sort li.active{
+    color: #3190e8;
+    font-weight: 700;
+}
+.filter-sort li.active .selected{
+    display: block;
 }
 .home-filter{
     position: -webkit-sticky;
@@ -803,6 +914,17 @@ export default {
     color: #333;
     font-weight: 700;
 }
+.filter-nav.open{
+    color: #3190e8;
+    font-weight: 700;
+}
+.filter-nav-more.open{
+    color: #3190e8;
+    font-weight: 700;
+}
+.filter-nav.open .dropdown-icon{
+    fill: currentColor;
+}
 .NoDataTip-wrapper{
     display: -webkit-flex;
     display: -webkit-box;
@@ -823,7 +945,6 @@ export default {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-bottom: 10vh;
 }
 .NoDataTip-wrapper img{
     display: block;
@@ -856,5 +977,23 @@ export default {
     text-align: center;
     font-size: 0.4rem;
     font-family: inherit;
+}
+.filtermodal{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    background: rgba(0,0,0,.5);
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    -webkit-backdrop-filter: blur(.133333rem);
+    -webkit-backdrop-filter: blur(1.333333vw);
+    backdrop-filter: blur(.133333rem);
+    backdrop-filter: blur(1.333333vw);
+}
+.mb{
+    margin-bottom: 10vh;
 }
 </style>

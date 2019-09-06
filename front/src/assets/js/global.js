@@ -5,4 +5,7 @@
     }
     win.addEventListener('resize',change,false);
     win.addEventListener('orientationchange',change,false);
+    jQuery.fn.isChildOf=function(b){
+        return (this.parents(b).length>0);
+    }
 })(window,document);

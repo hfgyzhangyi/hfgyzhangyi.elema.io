@@ -50,3 +50,6 @@ button,input,select,textarea{
     font-size: inherit;
     font-family: inherit;
 }
+ul{
+    list-style: none;
+}
