@@ -140,7 +140,7 @@
                     </a>
                     <a href="javascript:;" class="filter-nav" @click="filterNavClick($event)"><span>距离最近</span></a>
                     <a href="javascript:;" class="filter-nav" @click="filterNavClick($event)"><span>品质联盟</span></a>
-                    <a href="javascript:;" class="filter-nav-more">
+                    <a href="javascript:;" class="filter-nav-more" @click="filterNavMoreClick($event)">
                         <span>筛选</span>
                         <svg class="filter-nav-more__icon">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#more-filter">
@@ -188,6 +188,134 @@
                             <img src="../assets/images/home/17.png" alt="通用排序" class="selected">
                         </li>
                     </ul>
+                </section>
+                <section class="filter-extend filter-more">
+                    <div class="morefilter1">
+                        <dl>
+                            <dt>商家服务 (可多选)</dt>
+                            <dd>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <img class="morefilter_3" src="../assets/images/home/18.jpg">
+                                        <span>蜂鸟专送</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <img class="morefilter_3" src="../assets/images/home/19.jpg">
+                                        <span>品牌商家</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <img class="morefilter_3" src="../assets/images/home/20.jpg">
+                                        <span>新店</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <img class="morefilter_3" src="../assets/images/home/21.jpg">
+                                        <span>食安保</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <img class="morefilter_3" src="../assets/images/home/22.jpg">
+                                        <span>开发票</span>
+                                    </div>
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>优惠活动 (单选)</dt>
+                            <dd>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>首单立减</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>门店新客立减</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>满减优惠</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>下单返红包</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>进店领红包</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>配送费优惠</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>赠品优惠</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>特价商品</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>品质联盟红包</span>
+                                    </div>
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>人均消费</dt>
+                            <dd>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>¥20以下</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>¥20 - ¥40</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>¥40 - ¥60</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>¥60 - ¥80</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>¥80 - ¥100</span>
+                                    </div>
+                                </div>
+                                <div class="morefilter_1" @click="morefilter_1Click($event)">
+                                    <div class="morefilter_2">
+                                        <span>¥100以上</span>
+                                    </div>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="morefilter2">
+                        <span class="morefilter2_span1" @click="morefilter2Span1Click()">清空</span>
+                        <span class="morefilter2_span2" @click="morefilter2Span2Click()">确定</span>
+                    </div>
                 </section>
             </aside>
         </div>
@@ -371,7 +499,7 @@ export default {
                 }
             }else{
                 //如果点击不是$(".filter-nav:eq(0)")则给对象加上active,并且把$(".filter-nav:eq(0)")的html内容重置
-                $(".active").removeClass("active");
+                $(".filter-nav.active").removeClass("active");
                 $(event.currentTarget).addClass("active");
                 this.isClick=false;
                 $(".filter-nav:eq(0)").html("综合排序"+"&nbsp;"+svg_html);
@@ -397,6 +525,75 @@ export default {
             $(".recommend_wrap").show();
             $(".shoplist-title").show();
             $(".NoDataTip-wrapper").show();
+        },
+        filterNavMoreClick(event){
+            if($(".filter-more").css("opacity")==1){
+                $(".filter-more").removeClass("open");
+                $(".filter-nav-more").removeClass("open");
+                $(".filtermodal").hide();
+                $(".header").show();
+                $(".mint-swipe").show();
+                $(".recommend_wrap").show();
+                $(".shoplist-title").show();
+                $(".NoDataTip-wrapper").show();
+            }else{
+                //隐藏position不是sticky的元素
+                $(".header").hide();
+                $(".mint-swipe").hide();
+                $(".recommend_wrap").hide();
+                $(".shoplist-title").hide();
+                $(".NoDataTip-wrapper").hide();
+                $(".filter-more").addClass("open");
+                $(event.currentTarget).addClass("open");
+                $(".filtermodal").show();
+            }
+        },
+        morefilter_1Click(event){
+            if($(event.currentTarget).parent().parent().index()==0){
+                if(!$(event.currentTarget).hasClass("selected")){
+                    $(event.currentTarget).addClass("selected");
+                }else{
+                    $(event.currentTarget).removeClass("selected");
+                }
+            }else if($(event.currentTarget).parent().parent().index()==1){
+                if(!$(event.currentTarget).hasClass("selected")){
+                    $(event.currentTarget).siblings(".selected").removeClass("selected");
+                    $(event.currentTarget).addClass("selected");
+                }else{
+                    $(event.currentTarget).removeClass("selected");
+                }
+            }else if($(event.currentTarget).parent().parent().index()==2){
+                if(!$(event.currentTarget).hasClass("selected")){
+                    $(event.currentTarget).siblings(".selected").removeClass("selected");
+                    $(event.currentTarget).addClass("selected");
+                }else{
+                    $(event.currentTarget).removeClass("selected");
+                }
+            }
+            if($(".morefilter1").find(".selected").length>0){
+                $(".morefilter2_span1").addClass("enable");
+            }else{
+                $(".morefilter2_span1").removeClass("enable");
+            }
+        },
+        morefilter2Span1Click(){
+            $(".morefilter1").find(".selected").removeClass("selected");
+            $(".morefilter2_span1").removeClass("enable");
+        },
+        morefilter2Span2Click(){
+            if($(".morefilter1").find(".selected").length>0){
+                $(".filter-nav-more").addClass("active");
+            }else{
+                $(".filter-nav-more").removeClass("active");
+            }
+            $(".filter-more").removeClass("open");
+            $(".filter-nav-more").removeClass("open");
+            $(".filtermodal").hide();
+            $(".header").show();
+            $(".mint-swipe").show();
+            $(".recommend_wrap").show();
+            $(".shoplist-title").show();
+            $(".NoDataTip-wrapper").show();
         }
     },
     mounted(){
@@ -405,6 +602,16 @@ export default {
             if($(".filter-sort").hasClass("open")){
                 $(".filter-sort").removeClass("open");
                 $(".filter-nav:eq(0)").removeClass("open");
+                $(".filtermodal").hide();
+                $(".header").show();
+                $(".mint-swipe").show();
+                $(".recommend_wrap").show();
+                $(".shoplist-title").show();
+                $(".NoDataTip-wrapper").show();
+            }
+            if($(".filter-more").hasClass("open")&&!$(e.target).isChildAndSelfOf(".filter-more")){
+                $(".filter-more").removeClass("open");
+                $(".filter-nav-more").removeClass("open");
                 $(".filtermodal").hide();
                 $(".header").show();
                 $(".mint-swipe").show();
@@ -995,5 +1202,148 @@ export default {
 }
 .mb{
     margin-bottom: 10vh;
+}
+.morefilter1{
+    overflow: auto;
+    height: 100%;
+    padding: 0 .266667rem;
+    padding: 0 2.666667vw;
+    background: #fff;
+    -webkit-overflow-scrolling: touch;
+    line-height: normal;
+}
+.morefilter1 dl{
+    margin: .266667rem 0;
+    margin: 2.666667vw 0;
+    overflow: hidden;
+}
+.morefilter1 dt{
+    margin-left: 1%;
+    margin-bottom: .2rem;
+    margin-bottom: 2vw;
+    color: #666;
+    font-size: 0.333333rem;
+}
+.morefilter1 dd{
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    background: #fff;
+    position: relative;
+}
+.morefilter1 dd{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.morefilter_1{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.morefilter_1{
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 31.33%;
+    -ms-flex: 0 0 31.33%;
+    flex: 0 0 31.33%;
+    height: .933333rem;
+    height: 9.333333vw;
+    font-size: .346667rem;
+    margin: .08rem 1%;
+    margin: .8vw 1%;
+    background: #fafafa;
+}
+.morefilter_1 .morefilter_2{
+    white-space: nowrap;
+}
+.morefilter_1 .morefilter_3{
+    width: .346667rem;
+    width: 3.466667vw;
+    height: .346667rem;
+    height: 3.466667vw;
+    vertical-align: middle;
+    margin-right: .08rem;
+    margin-right: .8vw;
+}
+.morefilter_1 span{
+    margin-left: 2%;
+    vertical-align: middle;
+}
+.morefilter_1.selected{
+    font-weight: 700;
+    color: #3190e8;
+    background-color: #edf5ff;
+}
+.morefilter2{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #fafafa;
+    -webkit-box-shadow: 0 -0.026667rem 0.053333rem 0 #ededed;
+    -webkit-box-shadow: 0 -0.266667vw 0.533333vw 0 #ededed;
+    box-shadow: 0 -0.026667rem 0.053333rem 0 #ededed;
+    box-shadow: 0 -0.266667vw 0.533333vw 0 #ededed;
+    line-height: 1.146667rem;
+    line-height: 11.466667vw;
+}
+.morefilter2 .morefilter2_span1{
+    font-size: .426667rem;
+    text-align: center;
+    text-decoration: none;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.morefilter2 .morefilter2_span1{
+    background-color: #fff;
+    color: #ddd;
+}
+.morefilter2 .morefilter2_span1.enable{
+    color: #333;
+}
+.morefilter2 .morefilter2_span2{
+    font-size: .426667rem;
+    text-align: center;
+    text-decoration: none;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.morefilter2 .morefilter2_span2{
+    opacity: .5;
+    color: #fff;
+    background-color: #00d762;
+    border: .013333rem solid #00d762;
+    border: .133333vw solid #00d762;
+}
+.morefilter2 .morefilter2_span2{
+    opacity: 1;
+}
+.filter-nav-more.open .filter-nav-more__icon{
+    fill: currentColor;
+}
+.filter-nav-more.active{
+    color: #333;
+    font-weight: 700;
 }
 </style>

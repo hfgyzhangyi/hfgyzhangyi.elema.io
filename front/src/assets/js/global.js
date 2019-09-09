@@ -8,4 +8,7 @@
     jQuery.fn.isChildOf=function(b){
         return (this.parents(b).length>0);
     }
+    jQuery.fn.isChildAndSelfOf=function(b){
+        return (this.closest(b).length>0);
+    };
 })(window,document);
