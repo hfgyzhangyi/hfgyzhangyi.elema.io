@@ -1,11 +1,66 @@
 <template>
-    <div class="tmpl">222</div>
+    <div class="tmpl">
+        <div class="profile">
+            <section class="nodatatipWrap NoDataTip-wrapper">
+                <img src="../assets/images/book/1.png">
+                <h3>登录后查看外卖订单</h3>
+                <button>立即登录</button>
+            </section>
+        </div>
+    </div>
 </template>
 <script>
 export default {
     
 }
 </script>
-<style>
-
+<style scoped>
+.profile{
+    min-height: 100vh;
+    background-color: #F5F5F5;
+}
+.profile::before{
+    display: table;
+    content: "";
+}
+.NoDataTip-wrapper{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.nodatatipWrap{
+    margin-top: 2.666667rem;
+    margin-top: 26.666667vw;
+}
+.NoDataTip-wrapper img{
+    display: block;
+    width: 5.333333rem;
+    width: 53.333333vw;
+}
+.NoDataTip-wrapper h3{
+    margin: .333333rem 0 .266667rem;
+    margin: 3.333333vw 0 2.666667vw;
+    color: #6a6a6a;
+    font-weight: 400;
+    font-size: .453333rem;
+}
+.NoDataTip-wrapper button{
+    padding: .266667rem;
+    padding: 2.666667vw;
+    min-width: 3.2rem;
+    min-width: 32vw;
+    border: none;
+    border-radius: .053333rem;
+    border-radius: .533333vw;
+    background-color: #56d176;
+    color: #fff;
+    text-align: center;
+    font-size: 0.6em;
+    font-family: inherit;
+}
 </style>
