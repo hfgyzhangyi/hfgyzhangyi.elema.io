@@ -5,6 +5,9 @@
     }
     win.addEventListener('resize',change,false);
     win.addEventListener('orientationchange',change,false);
+    win.onbeforeunload=function(){
+        this.localStorage.setItem("navTabIndex","首页");
+    }
     jQuery.fn.isChildOf=function(b){
         return (this.parents(b).length>0);
     }

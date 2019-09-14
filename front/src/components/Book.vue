@@ -6,6 +6,7 @@
                 <h3>登录后查看外卖订单</h3>
                 <button>立即登录</button>
             </section>
+            <div class="mb"></div>
         </div>
     </div>
 </template>
@@ -20,6 +21,10 @@ export default {
     background-color: #F5F5F5;
 }
 .profile::before{
+    display: table;
+    content: "";
+}
+.profile::after{
     display: table;
     content: "";
 }
@@ -60,7 +65,7 @@ export default {
     background-color: #56d176;
     color: #fff;
     text-align: center;
-    font-size: 0.6em;
+    font-size: 0.2rem;
     font-family: inherit;
 }
 </style>
