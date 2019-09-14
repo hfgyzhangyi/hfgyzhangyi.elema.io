@@ -172,6 +172,10 @@ export default {
     min-height: 100vh;
     background-color: #F5F5F5;
 }
+.profile::after{
+    display: table;
+    content: "";
+}
 .profile_1{
     display: -webkit-flex;
     display: flex;

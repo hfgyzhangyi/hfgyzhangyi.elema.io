@@ -5,6 +5,7 @@ import Home from '@/components/Home'
 import Mine from '@/components/Mine'
 import Find from '@/components/Find'
 import Book from '@/components/Book'
+import Position from '@/components/Position'
 
 Vue.use(Router)
 const originalPush=Router.prototype.push;
@@ -39,6 +40,11 @@ export default new Router({
       path: '/Book',
       name: 'Book',
       component: Book
+    },
+    {
+      path: '/Position',
+      name: 'Position',
+      component: Position
     }
   ]
 })
