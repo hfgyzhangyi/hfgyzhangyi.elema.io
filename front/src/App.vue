@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
-    <mt-tabbar v-model="selected" fixed class="tabber">
+    <mt-tabbar v-model="selected" fixed class="tabber" v-if="$route.meta.showTab">
       <mt-tab-item id="首页" @click.native="tabItemClick($event)">
         <img slot="icon" src="./assets/images/Tabber_1_1.png">
         首页

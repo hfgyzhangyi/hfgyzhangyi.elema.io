@@ -6,6 +6,7 @@ import Mine from '@/components/Mine'
 import Find from '@/components/Find'
 import Book from '@/components/Book'
 import Position from '@/components/Position'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 const originalPush=Router.prototype.push;
@@ -19,32 +20,55 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta:{
+        showTab:true
+      }
     },
     {
       path: '/HelloWorld',
       name: 'HelloWorld',
-      component: HelloWorld
+      component: HelloWorld,
+      meta:{
+        showTab:true
+      }
     },
     {
       path: '/Mine',
       name: 'Mine',
-      component: Mine
+      component: Mine,
+      meta:{
+        showTab:true
+      }
     },
     {
       path: '/Find',
       name: 'Find',
-      component: Find
+      component: Find,
+      meta:{
+        showTab:true
+      }
     },
     {
       path: '/Book',
       name: 'Book',
-      component: Book
+      component: Book,
+      meta:{
+        showTab:true
+      }
     },
     {
       path: '/Position',
       name: 'Position',
-      component: Position
+      component: Position,
+      meta:{
+        showTab:true
+      }
+    },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login
     }
   ]
 })

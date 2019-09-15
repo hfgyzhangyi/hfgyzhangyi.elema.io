@@ -276,6 +276,7 @@ section.parts{
     width: 4.4vw;
     height: .44rem;
     height: 4.4vw;
+    fill: #ff5339;
 }
 .activity-sub-title{
     font-size: .293333rem;
