@@ -1,10 +1,10 @@
 <template>
     <div class="tmpl">
         <div class="profile">
-            <section class="nodatatipWrap NoDataTip-wrapper">
+            <section class="nodatatipWrap NoDataTip-wrapper" v-if="isShow">
                 <img src="../assets/images/book/1.png">
                 <h3>登录后查看外卖订单</h3>
-                <button>立即登录</button>
+                <button @click="login()">立即登录</button>
             </section>
             <div class="mb"></div>
         </div>
@@ -12,7 +12,34 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return{
+            isShow:true
+        }
+    },
+    methods:{
+        login(){
+            this.$router.push({name:"Login"});
+        }
+    },
+    created(){
+        if(window.sessionStorage.getItem("phone_number")!=null){
+            this.isShow=false;
+        }else{
+            this.isShow=true;
+        }
+    },
+    mounted(){
+        if(window.sessionStorage.getItem("navTabIndex")=="首页"){
+            $(".mint-tab-item:eq(0)").find("img").attr("src",require("../assets/images/Tabber_1_2.png"));
+        }else if(window.sessionStorage.getItem("navTabIndex")=="发现"){
+            $(".mint-tab-item:eq(1)").find("img").attr("src",require("../assets/images/Tabber_2_2.png"));
+        }else if(window.sessionStorage.getItem("navTabIndex")=="订单"){
+            $(".mint-tab-item:eq(2)").find("img").attr("src",require("../assets/images/Tabber_3_2.png"));
+        }else if(window.sessionStorage.getItem("navTabIndex")=="我的"){
+            $(".mint-tab-item:eq(3)").find("img").attr("src",require("../assets/images/Tabber_4_2.png"));
+        }
+    }
 }
 </script>
 <style scoped>

@@ -3,7 +3,7 @@
         <div class="profile">
             <div style="position:sticky;top:0px;z-index:1000;">
                 <div class="index_1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 33" class="index_1_svg"><path fill-rule="evenodd" d="M17.655 1.853L15.961.159.033 16.072 15.961 32l1.694-1.694L3.429 16.08 17.655 1.854z" class="path1"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 33" class="index_1_svg" @click="back()"><path fill-rule="evenodd" d="M17.655 1.853L15.961.159.033 16.072 15.961 32l1.694-1.694L3.429 16.08 17.655 1.854z" class="path1"></path></svg>
                     <div class="index_1_div">选择收货地址</div>
                 </div>
             </div>
@@ -14,14 +14,14 @@
                 </div>
                 <div class="index_2_div2">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="index_2_svg2"><path fill-opacity=".38" d="M14.778 13.732a.739.739 0 1 1-1.056 1.036l-2.515-2.565a.864.864 0 0 1-.01-1.206 4.894 4.894 0 0 0 1.357-3.651c-.126-2.492-2.156-4.52-4.648-4.647a4.911 4.911 0 0 0-5.16 5.163c.126 2.475 2.13 4.496 4.605 4.642.451.026.896-.008 1.326-.1a.739.739 0 0 1 .308 1.446c-.56.12-1.137.164-1.72.13-3.227-.19-5.83-2.815-5.995-6.042a6.39 6.39 0 0 1 6.71-6.715c3.25.165 5.884 2.8 6.05 6.048a6.37 6.37 0 0 1-1.374 4.3l2.12 2.161z"></path></svg>
-                    <input type="search" placeholder="请输入地址" class="index_2_input1">
+                    <input type="search" placeholder="请输入地址" class="index_2_input1" v-model="position">
                 </div>
             </div>
             <section>
-                <div class="address-cell">
-                    <div class="address-cell-div1">
-                        <p><span class="address-cell-div1-span1"><span>上海</span>市</span><span class="address-cell-div1-span2"></span></p>
-                        <p class="address-cell-div1-p1">上海市黄浦区上海市</p>
+                <div class="address-cell" v-for="(item,i) of position_list" :key="i">
+                    <div class="address-cell-div1" @click="positionSelected($event)">
+                        <p><span class="address-cell-div1-span1"><span>{{position}}</span>{{item.address_name.slice(position.length)}}</span><span class="address-cell-div1-span2"></span></p>
+                        <p class="address-cell-div1-p1">{{item.address}}</p>
                     </div>
                 </div>
             </section>
@@ -30,7 +30,27 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return{
+            position:'',
+            position_list:''
+        }
+    },
+    watch:{
+        position:function(val,oldVal){
+            this.$axios.get("http://localhost:3000/position",{params:{address_name:val}}).then(res=>{this.position_list=res.data;});
+        }
+    },
+    methods:{
+        positionSelected(event){
+            window.sessionStorage.setItem("position",$(event.currentTarget).find(".address-cell-div1-span1").text());
+            window.sessionStorage.setItem("address",$(event.currentTarget).children(".address-cell-div1-p1").text());
+            this.$router.push({name:'Home'});
+        },
+        back(){
+            this.$router.push({name:"Home"});
+        }
+    }
 }
 </script>
 <style scoped>

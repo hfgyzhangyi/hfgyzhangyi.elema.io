@@ -19,7 +19,7 @@
                         和
                         <a href="javascript:;">《隐私权政策》</a>
                     </section>
-                    <button class="SubmitButton">登录</button>
+                    <button class="SubmitButton" @click="checkLogin($event)">登录</button>
                 </form>
                 <a href="javascript:;" class="about_us">关于我们</a>
             </div>
@@ -28,7 +28,34 @@
 </template>
 <script>
 export default {
-    
+    methods:{
+        checkLogin(event){
+            event.preventDefault();
+            this.$axios.post("http://localhost:3000/login",
+            "phone_number="+$(".messageLogin").find("input:eq(0)").val()+
+            "&code="+$(".messageLogin").find("input:eq(1)").val()).then(res=>{
+                if(res.data=="err1"){
+                    this.$toast("验证码错误");
+                }else if(res.data=="err2"){
+                    this.$toast("手机号未注册");
+                }else{
+                    window.sessionStorage.setItem("user_name",res.data[0].user_name);
+                    window.sessionStorage.setItem("phone_number",res.data[0].phone_number);
+                    window.sessionStorage.setItem("real_name",res.data[0].real_name);
+                    window.sessionStorage.setItem("address",res.data[0].address);
+                    if(window.sessionStorage.getItem("navTabIndex")=="首页"){
+                        this.$router.push({name:'Home'});
+                    }else if(window.sessionStorage.getItem("navTabIndex")=="发现"){
+                        this.$router.push({name:'Find'});
+                    }else if(window.sessionStorage.getItem("navTabIndex")=="订单"){
+                        this.$router.push({name:'Book'});
+                    }else if(window.sessionStorage.getItem("navTabIndex")=="我的"){
+                        this.$router.push({name:'Mine'});
+                    }
+                }
+            });
+        }
+    }
 }
 </script>
 <style scoped>

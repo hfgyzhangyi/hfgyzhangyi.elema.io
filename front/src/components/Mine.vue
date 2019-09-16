@@ -7,14 +7,14 @@
                         <img src="../assets/images/mine/1.png">
                     </div>
                     <div class="profile_1_div1">
-                        <p class="profile_1_p1">登录/注册</p>
+                        <p class="profile_1_p1" @click="login()">登录/注册</p>
                         <p class="profile_1_p2">
                             <svg fill="#fff">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mobile">
                                     <svg viewBox="0 0 655 1024" id="mobile" width="100%" height="100%"><path d="M0 122.501v778.998C0 968.946 55.189 1024 123.268 1024h408.824c68.52 0 123.268-54.846 123.268-122.501V122.501C655.36 55.054 600.171 0 532.092 0H123.268C54.748 0 0 54.846 0 122.501zM327.68 942.08c-22.622 0-40.96-18.338-40.96-40.96s18.338-40.96 40.96-40.96 40.96 18.338 40.96 40.96-18.338 40.96-40.96 40.96zM81.92 163.84h491.52V819.2H81.92V163.84z"></path></svg>
                                 </use>
                             </svg>
-                            <span>登录后享受更多特权</span>
+                            <span>{{phone_number}}</span><!--过滤器-->
                         </p>
                     </div>
                     <span class="profile_1_span1">
@@ -164,7 +164,33 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return{
+            phone_number:"登录后享受更多特权"
+        }
+    },
+    mounted(){
+        if(window.sessionStorage.getItem("phone_number")!=null){
+            $(".profile_1_p1").text(window.sessionStorage.getItem("user_name"));
+            this.phone_number=window.sessionStorage.getItem("phone_number");
+        }
+        if(window.sessionStorage.getItem("navTabIndex")=="首页"){
+            $(".mint-tab-item:eq(0)").find("img").attr("src",require("../assets/images/Tabber_1_2.png"));
+        }else if(window.sessionStorage.getItem("navTabIndex")=="发现"){
+            $(".mint-tab-item:eq(1)").find("img").attr("src",require("../assets/images/Tabber_2_2.png"));
+        }else if(window.sessionStorage.getItem("navTabIndex")=="订单"){
+            $(".mint-tab-item:eq(2)").find("img").attr("src",require("../assets/images/Tabber_3_2.png"));
+        }else if(window.sessionStorage.getItem("navTabIndex")=="我的"){
+            $(".mint-tab-item:eq(3)").find("img").attr("src",require("../assets/images/Tabber_4_2.png"));
+        }
+    },
+    methods:{
+        login(){
+            if($(".profile_1_p1").text()=="登录/注册"){
+                this.$router.push({name:"Login"});
+            }
+        }
+    }
 }
 </script>
 <style scoped>

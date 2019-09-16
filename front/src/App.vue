@@ -61,31 +61,55 @@ export default {
     }
   },
   mounted(){
-    if(window.localStorage.getItem("navTabIndex")=="首页"){
+    // if(window.localStorage.getItem("navTabIndex")=="首页"){
+    //   $(".mint-tab-item:eq(0)").find("img").attr("src",require("./assets/images/Tabber_1_2.png"));
+    //   $(".mint-tab-item:eq(0)").addClass("is-selected");
+    //   this.$router.push({name:'Home'});
+    // }else if(window.localStorage.getItem("navTabIndex")=="发现"){
+    //   $(".mint-tab-item:eq(1)").find("img").attr("src",require("./assets/images/Tabber_2_2.png"));
+    //   $(".mint-tab-item:eq(1)").addClass("is-selected");
+    //   this.$router.push({name:'Find'});
+    // }else if(window.localStorage.getItem("navTabIndex")=="订单"){
+    //   $(".mint-tab-item:eq(2)").find("img").attr("src",require("./assets/images/Tabber_3_2.png"));
+    //   $(".mint-tab-item:eq(2)").addClass("is-selected");
+    //   this.$router.push({name:'Book'});
+    // }else if(window.localStorage.getItem("navTabIndex")=="我的"){
+    //   $(".mint-tab-item:eq(3)").find("img").attr("src",require("./assets/images/Tabber_4_2.png"));
+    //   $(".mint-tab-item:eq(3)").addClass("is-selected");
+    //   this.$router.push({name:'Mine'});
+    // }else{
+    //   $(".mint-tab-item:eq(0)").find("img").attr("src",require("./assets/images/Tabber_1_2.png"));
+    //   $(".mint-tab-item:eq(0)").addClass("is-selected");
+    //   this.$router.push({name:'Home'});
+    // }
+    if(window.sessionStorage.getItem("navTabIndex")=="首页"){
       $(".mint-tab-item:eq(0)").find("img").attr("src",require("./assets/images/Tabber_1_2.png"));
       $(".mint-tab-item:eq(0)").addClass("is-selected");
       this.$router.push({name:'Home'});
-    }else if(window.localStorage.getItem("navTabIndex")=="发现"){
+    }else if(window.sessionStorage.getItem("navTabIndex")=="发现"){
       $(".mint-tab-item:eq(1)").find("img").attr("src",require("./assets/images/Tabber_2_2.png"));
       $(".mint-tab-item:eq(1)").addClass("is-selected");
       this.$router.push({name:'Find'});
-    }else if(window.localStorage.getItem("navTabIndex")=="订单"){
+    }else if(window.sessionStorage.getItem("navTabIndex")=="订单"){
       $(".mint-tab-item:eq(2)").find("img").attr("src",require("./assets/images/Tabber_3_2.png"));
       $(".mint-tab-item:eq(2)").addClass("is-selected");
       this.$router.push({name:'Book'});
-    }else if(window.localStorage.getItem("navTabIndex")=="我的"){
+    }else if(window.sessionStorage.getItem("navTabIndex")=="我的"){
       $(".mint-tab-item:eq(3)").find("img").attr("src",require("./assets/images/Tabber_4_2.png"));
       $(".mint-tab-item:eq(3)").addClass("is-selected");
       this.$router.push({name:'Mine'});
     }else{
       $(".mint-tab-item:eq(0)").find("img").attr("src",require("./assets/images/Tabber_1_2.png"));
       $(".mint-tab-item:eq(0)").addClass("is-selected");
+      window.sessionStorage.setItem("navTabIndex","首页");
       this.$router.push({name:'Home'});
     }
   },
   watch:{
     selected:function(val,oldVal){
-      window.localStorage.setItem("navTabIndex",val);
+      //window.localStorage.setItem("navTabIndex",val);
+      //this.$store.dispatch("modifyNavTabSelectedFun",val);
+      window.sessionStorage.setItem("navTabIndex",val);
     }
   }
 }
