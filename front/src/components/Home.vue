@@ -601,7 +601,7 @@ export default {
         },
         showListOrLogin(event){
             if(window.sessionStorage.getItem("phone_number")!=null){
-                this.$router.push({name:"Home"});//TODO
+                this.$router.push({name:"Search"});
             }
         }
     },

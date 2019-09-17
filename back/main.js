@@ -3,6 +3,7 @@ const bodyParser=require("body-parser");
 const cookieParser=require("cookie-parser");
 const positionRouter=require("./router/position.js");
 const loginRouter=require("./router/login.js");
+const searchRouter=require("./router/search.js");
 var session=require("express-session");
 var server=express();
 server.listen(3000);
@@ -23,3 +24,4 @@ server.use(session({
 }));
 server.use("/position",positionRouter);
 server.use("/login",loginRouter);
+server.use("/search",searchRouter);

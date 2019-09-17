@@ -7,6 +7,7 @@ import Find from '@/components/Find'
 import Book from '@/components/Book'
 import Position from '@/components/Position'
 import Login from '@/components/Login'
+import Search from '@/components/Search'
 
 Vue.use(Router)
 const originalPush=Router.prototype.push;
@@ -69,6 +70,11 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/Search',
+      name: 'Search',
+      component: Search
     }
   ]
 })

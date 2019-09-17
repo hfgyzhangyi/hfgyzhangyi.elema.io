@@ -55,6 +55,19 @@ export default {
                 }
             });
         }
+    },
+    created(){
+        if(window.sessionStorage.getItem("phone_number")!=null){
+            if(window.sessionStorage.getItem("navTabIndex")=="首页"){
+                this.$router.push({name:'Home'});
+            }else if(window.sessionStorage.getItem("navTabIndex")=="发现"){
+                this.$router.push({name:'Find'});
+            }else if(window.sessionStorage.getItem("navTabIndex")=="订单"){
+                this.$router.push({name:'Book'});
+            }else if(window.sessionStorage.getItem("navTabIndex")=="我的"){
+                this.$router.push({name:'Mine'});
+            }
+        }
     }
 }
 </script>

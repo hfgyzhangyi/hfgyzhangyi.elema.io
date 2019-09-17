@@ -33,7 +33,13 @@ var store=new Vuex.Store({
     }
   }
 });
-
+Vue.filter("phoneNumberFilter",function(val){
+  if(val!="登录后享受更多特权"){
+    return val.slice(0,3)+"****"+val.slice(7);
+  }else{
+    return val;
+  }
+});
 new Vue({
   el: '#app',
   router,
