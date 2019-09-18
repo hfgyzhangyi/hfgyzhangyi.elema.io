@@ -319,6 +319,52 @@
                 </section>
             </aside>
         </div>
+        <section class="shoplist" v-if="!isShow">
+            <section class="shop-wrap">
+                <div class="shop-wrap-div1">
+                    <div class="image-wrap">
+                        <img src="../assets/images/home/shop1.jpg"/>
+                    </div>
+                    <div class="main-wrap">
+                        <section class="main-wrap-title">
+                            <h3 class="main-wrap-title-h3">
+                                <span>老北京炸酱面(浦江店)</span>
+                            </h3>
+                        </section>
+                        <section class="main-wrap-star">
+                            <div class="main-wrap-star-div">
+                                <img src="../assets/images/home/star4.7.png" width="54" height="10"/>
+                                <span>4.7</span>
+                                <span>月售2492单</span>
+                            </div>
+                        </section>
+                        <section class="main-wrap-bottom">
+                            <div class="main-wrap-bottom-div1"><span>¥15起送</span><span>配送费¥1</span></div>
+                            <div class="main-wrap-bottom-div2"><span>1.08km</span><span>26分钟</span></div>
+                        </section>
+                    </div>
+                </div>
+                <div class="shop-wrap-div2">
+                    <section class="tag-wrap">
+                        <span>北京炸酱面</span>
+                        <span>支持自取</span>
+                        <span>品质联盟</span>
+                    </section>
+                    <section class="discount-wrap">
+                        <div class="discount-wrap-div1">
+                            <div class="discount-wrap-div1-row">
+                                <span class="discount-icon-wrap"><span class="discount-icon" style="background-color:rgb(240, 115, 115);">减</span></span>
+                                <span class="discount-desc">满22减5，满30减8，满45减12，满65减15</span>
+                            </div>
+                            <div class="discount-wrap-div1-row">
+                                <span class="discount-icon-wrap"><span class="discount-icon" style="background-color:rgb(240, 115, 115);">折</span></span>
+                                <span class="discount-desc">折扣商品6折起</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </section>
         <section class="NoDataTip-wrapper" v-if="isShow">
             <img src="../assets/images/home/16.png">
             <h3>没有结果</h3>
@@ -1377,5 +1423,218 @@ export default {
 .filter-nav-more.active{
     color: #333;
     font-weight: 700;
+}
+.shop-wrap{
+    position: relative;
+    border-bottom: .133333vw solid #eee;
+    color: #666;
+    font-size: .293333rem;
+    padding: 4vw 0;
+}
+.shop-wrap-div1{
+    padding: 0 2.666667vw;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+.image-wrap{
+    -webkit-flex: none;
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+    width: 1.733333rem;
+    width: 17.333333vw;
+    height: 1.733333rem;
+    height: 17.333333vw;
+}
+.main-wrap{
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-between;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    overflow: hidden;
+    -webkit-flex-grow: 1;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    padding-left: 2.666667vw;
+    -webkit-flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.main-wrap-title{
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.main-wrap-title-h3{
+    color: #333;
+    font-weight: 700;
+    font-size: .4rem;
+    overflow: hidden;
+}
+.main-wrap-title-h3 span{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.main-wrap-star{
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-between;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.main-wrap-bottom{
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-between;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.main-wrap-bottom-div1 span+span::before{
+    margin: 0 .8vw;
+    color: #ddd;
+    content: "|";
+}
+.main-wrap-bottom-div2 span+span::before{
+    margin: 0 .8vw;
+    color: #ddd;
+    content: "|";
+}
+.main-wrap-bottom-div2 span{
+    color: #999999;
+}
+.shop-wrap-div2{
+    padding-left: 22.666667vw;
+}
+.tag-wrap{
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 2.666667vw 2.666667vw 0 0;
+}
+.tag-wrap span{
+    border: 1px solid rgb(221, 221, 221);
+    color: rgb(102, 102, 102);
+    border-radius: .533333vw;
+    padding: 0 2.133333vw;
+    font-size: .133333rem;
+    margin-right: 1.333333vw;
+    margin-bottom: 1.066667vw;
+}
+.discount-wrap-div1{
+    -webkit-flex: 1;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding-right: .266667rem;
+    padding-right: 2.666667vw;
+    overflow: hidden;
+}
+.discount-wrap-div2{
+    padding: .08rem .266667rem 0 0;
+    padding: .8vw 2.666667vw 0 0;
+    color: #999;
+    text-align: right;
+    font-size: .266667rem;
+    line-height: 1;
+}
+.discount-wrap-div1-row{
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: .293333rem;
+    line-height: .48rem;
+    line-height: 4.8vw;
+}
+.discount-wrap-div1-row:nth-child(2){
+    margin-top: .066667rem;
+    margin-top: .666667vw;
+}
+.discount-icon-wrap{
+    display: inline-block;
+    position: relative;
+    margin-right: .16rem;
+    margin-right: 1.6vw;
+    height: .373333rem;
+    height: 3.733333vw;
+    width: .373333rem;
+    width: 3.733333vw;
+    vertical-align: middle;
+}
+.discount-icon{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    height: .746667rem;
+    height: 7.466667vw;
+    width: .746667rem;
+    width: 7.466667vw;
+    font-size: .56rem;
+    color: #fff;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: .106667rem;
+    border-radius: 1.066667vw;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+.discount-desc{
+    display: inline-block;
+    -webkit-flex: 1;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
 }
 </style>
