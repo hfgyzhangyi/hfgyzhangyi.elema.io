@@ -320,45 +320,43 @@
             </aside>
         </div>
         <section class="shoplist" v-if="!isShow">
-            <section class="shop-wrap">
+            <section class="shop-wrap" v-for="(item,i) of storeList" :key="i">
                 <div class="shop-wrap-div1">
                     <div class="image-wrap">
-                        <img src="../assets/images/home/shop1.jpg"/>
+                        <img :src="require('../assets/images/home/'+item.store_pic)"/>
                     </div>
                     <div class="main-wrap">
                         <section class="main-wrap-title">
                             <h3 class="main-wrap-title-h3">
-                                <span>老北京炸酱面(浦江店)</span>
+                                <span>{{item.store_name}}</span>
                             </h3>
                         </section>
                         <section class="main-wrap-star">
                             <div class="main-wrap-star-div">
-                                <img src="../assets/images/home/star4.7.png" width="54" height="10"/>
-                                <span>4.7</span>
-                                <span>月售2492单</span>
+                                <img :src="item.estimate==4.7?require('../assets/images/home/star4.7.png'):require('../assets/images/home/star4.9.png')" width="54" height="10"/>
+                                <span>{{item.estimate}}</span>
+                                <span>月售{{item.sales}}单</span>
                             </div>
                         </section>
                         <section class="main-wrap-bottom">
-                            <div class="main-wrap-bottom-div1"><span>¥15起送</span><span>配送费¥1</span></div>
+                            <div class="main-wrap-bottom-div1"><span>¥{{item.low_pay}}起送</span><span>配送费¥{{item.distribution_fee}}</span></div>
                             <div class="main-wrap-bottom-div2"><span>1.08km</span><span>26分钟</span></div>
                         </section>
                     </div>
                 </div>
                 <div class="shop-wrap-div2">
                     <section class="tag-wrap">
-                        <span>北京炸酱面</span>
-                        <span>支持自取</span>
-                        <span>品质联盟</span>
+                        <span v-for="(tag,i) of item.tag" :key="i">{{tag}}</span>
                     </section>
                     <section class="discount-wrap">
                         <div class="discount-wrap-div1">
                             <div class="discount-wrap-div1-row">
                                 <span class="discount-icon-wrap"><span class="discount-icon" style="background-color:rgb(240, 115, 115);">减</span></span>
-                                <span class="discount-desc">满22减5，满30减8，满45减12，满65减15</span>
+                                <span class="discount-desc">{{item.discount1}}</span>
                             </div>
                             <div class="discount-wrap-div1-row">
                                 <span class="discount-icon-wrap"><span class="discount-icon" style="background-color:rgb(240, 115, 115);">折</span></span>
-                                <span class="discount-desc">折扣商品6折起</span>
+                                <span class="discount-desc">{{item.discount2}}</span>
                             </div>
                         </div>
                     </section>
@@ -385,7 +383,8 @@ export default {
             clientWidth:0,
             startTime:0,
             isClick:false,
-            isShow:true
+            isShow:true,
+            storeList:''
         }
     },
     methods:{
@@ -700,6 +699,13 @@ export default {
             this.isShow=false;
         }else{
             this.isShow=true;
+        }
+    },
+    beforeMount(){
+        if(!this.isShow){
+            this.$axios.get("http://localhost:3000/storeList").then(res=>{
+                this.storeList=res.data;
+            });
         }
     }
 }
