@@ -45,5 +45,11 @@ new Vue({
   router,
   components: {App},
   template: '<App/>',
-  store
+  store,
+  watch:{
+    '$route':function(from,to){
+      document.body.scrollTop=0;
+      document.documentElement.scrollTop=0;
+    }
+  }
 })
