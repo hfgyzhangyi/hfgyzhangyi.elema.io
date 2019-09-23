@@ -13,7 +13,7 @@
                 <li class="category-wrap-li" @click="titleLiClick($event)">轻食简餐</li>
             </ul>
             <div class="category-wrap-div">
-                <svg class="category-wrap-svg">
+                <svg class="category-wrap-svg" @click="open()">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#drop-down">
                         <svg viewBox="0 0 26 26" id="drop-down" width="100%" height="100%"><path fill="#FFF" d="M13.086 17.627L3.219 7.76a1.131 1.131 0 0 0-1.6 1.6l10.667 10.667a1.131 1.131 0 0 0 1.6 0L24.553 9.36a1.131 1.131 0 0 0-1.6-1.6l-9.867 9.867z"></path></svg>
                     </use>
@@ -255,6 +255,142 @@
                 </div>
             </section>
         </section>
+        <section class="filter-category">
+            <div class="top">
+                <h3 class="title">请选择分类</h3>
+                <button class="close" @click="close()"></button>
+            </div>
+            <div class="filter-scroller">
+                <ul class="menu main-menu">
+                    <li class="menu-item menu-item--main active" @click="mainMenuItemClick($event)"><span class="menu-name">美食</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">快餐便当</span><span count="376" class="count">376</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">特色菜系</span><span count="102" class="count">102</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">全球美食</span><span count="25" class="count">25</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">小吃夜宵</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">甜品饮品</span><span count="275" class="count">275</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">商店超市</span><span count="80" class="count">80</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">鲜花绿植</span><span count="100" class="count">100</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">医药健康</span><span count="10" class="count">10</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">早餐</span><span count="97" class="count">97</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">午餐</span><span count="77" class="count">77</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">下午茶</span><span count="357" class="count">357</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">晚餐</span><span count="269" class="count">269</span></li>
+                    <li class="menu-item menu-item--main" @click="mainMenuItemClick($event)"><span class="menu-name">夜宵</span><span count="217" class="count">217</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub active" @click="subMenuItemClick($event)"><span class="menu-name">全部</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">小吃炸串</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">地方菜系</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">简餐便当</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">香锅冒菜</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">汉堡披萨</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">快餐便当1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">快餐便当2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">快餐便当3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">快餐便当4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">快餐便当5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">快餐便当6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">特色菜系1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">特色菜系2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">特色菜系3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">特色菜系4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">特色菜系5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">特色菜系6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">全球美食1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">全球美食2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">全球美食3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">全球美食4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">全球美食5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">全球美食6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">小吃夜宵1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">小吃夜宵2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">小吃夜宵3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">小吃夜宵4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">小吃夜宵5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">小吃夜宵6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">甜品饮品1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">甜品饮品2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">甜品饮品3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">甜品饮品4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">甜品饮品5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">甜品饮品6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">商店超市1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">商店超市2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">商店超市3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">商店超市4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">商店超市5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">商店超市6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">鲜花绿植1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">鲜花绿植2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">鲜花绿植3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">鲜花绿植4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">鲜花绿植5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">鲜花绿植6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">医药健康1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">医药健康2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">医药健康3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">医药健康4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">医药健康5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">医药健康6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">早餐1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">早餐2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">早餐3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">早餐4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">早餐5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">早餐6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">午餐1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">午餐2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">午餐3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">午餐4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">午餐5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">午餐6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">下午茶1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">下午茶2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">下午茶3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">下午茶4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">下午茶5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">下午茶6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">晚餐1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">晚餐2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">晚餐3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">晚餐4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">晚餐5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">晚餐6</span><span count="19" class="count">19</span></li>
+                </ul>
+                <ul class="menu submenu">
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">夜宵1</span><span count="411" class="count">411</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">夜宵2</span><span count="176" class="count">176</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">夜宵3</span><span count="105" class="count">105</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">夜宵4</span><span count="85" class="count">85</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">夜宵5</span><span count="26" class="count">26</span></li>
+                    <li class="menu-item menu-item--sub" @click="subMenuItemClick($event)"><span class="menu-name">夜宵6</span><span count="19" class="count">19</span></li>
+                </ul>
+            </div>
+        </section>
     </div>
 </template>
 <script>
@@ -262,7 +398,8 @@ export default {
     data(){
         return{
             isClick:false,
-            storeList:''
+            storeList:'',
+            scrollTop:0
         }
     },
     methods:{
@@ -376,6 +513,35 @@ export default {
             $(".recommend_wrap").show();
             $(".shoplist-title").show();
             $(".NoDataTip-wrapper").show();
+        },
+        mainMenuItemClick(event){
+            $(".menu-item--main.active").removeClass("active");
+            $(event.currentTarget).addClass("active");
+            var index=$(".menu-item--main.active").index();
+            $(".submenu").hide();
+            $(".submenu:eq("+index+")").show();
+        },
+        close(){
+            document.documentElement.scrollTop=this.scrollTop;
+            $(".filter-category").removeClass("open");
+            $(".filtermodal").hide();
+            document.documentElement.style.overflow='scroll';
+            $(".submenu").hide();
+        },
+        open(){
+            this.scrollTop=document.documentElement.scrollTop;
+            document.documentElement.scrollTop=0;
+            var index=$(".menu-item--main.active").index();
+            $(".submenu:eq("+index+")").show();
+            $(".filter-category").addClass("open");
+            $(".filtermodal").show();
+            document.documentElement.style.overflow='hidden';
+        },
+        subMenuItemClick(event){
+            $(".menu-item--sub.active").removeClass("active");
+            $(event.currentTarget).addClass("active");
+            $(".filter-category").removeClass("open");
+            $(".filtermodal").hide();
         }
     },
     mounted(){
@@ -1024,5 +1190,196 @@ export default {
 }
 .shoplist{
     background-color: #fff;
+}
+
+
+.filter-category{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    z-index: 200;
+    padding-bottom: 0;
+    color: #666;
+    visibility: hidden;
+    opacity: 0;
+    background: #f9f9f9;
+}
+.filter-category.open{
+    visibility: visible;
+    opacity: 1;
+}
+.top{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0 .2rem 0 .4rem;
+    padding: 0 2vw 0 4vw;
+    height: 1.066667rem;
+    height: 10.666667vw;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.title{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-size: .373333rem;
+    font-weight: 700;
+    color: #333;
+}
+.close{
+    -webkit-appearance: none;
+    outline: none;
+    background: url("../assets/images/foodList/1.png");
+    width: .4rem;
+    width: 4vw;
+    height: .4rem;
+    height: 4vw;
+    background-size: 100%;
+    margin-right: 2vw;
+}
+.filter-scroller{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    border-top: 1px solid #eee;
+    background-color: #fff;
+}
+.menu{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.main-menu{
+    width: 3.466667rem;
+    width: 34.666667vw;
+    background-color: #fcfcfc;
+}
+.menu-item{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 1.28rem;
+    height: 12.8vw;
+    line-height: 1.28rem;
+    line-height: 12.8vw;
+}
+.menu-item--main{
+    padding-right: .266667rem;
+    padding-right: 2.666667vw;
+    border-right: 1px solid #f5f5f5;
+    border-bottom: .013333rem solid transparent;
+    border-bottom: .133333vw solid transparent;
+}
+.menu-item--main.active{
+    background-color: #fff;
+    border-right-width: 0;
+    border-bottom-color: #f5f5f5;
+}
+.menu-name{
+    font-size: .373333rem;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: .533333rem;
+    height: 5.333333vw;
+    line-height: .533333rem;
+    line-height: 5.333333vw;
+}
+.menu-item--main .menu-name{
+    position: relative;
+    padding-left: .533333rem;
+    padding-left: 5.333333vw;
+}
+.menu-item--main.active .menu-name::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: .106667rem;
+    width: 1.066667vw;
+    height: .533333rem;
+    height: 5.333333vw;
+    background-color: #2395ff;
+}
+.count{
+    position: relative;
+    width: .8rem;
+    width: 8vw;
+    height: .373333rem;
+    height: 3.733333vw;
+    font-size: 0;
+    border: 1px solid #eee;
+    border-radius: .2rem;
+    border-radius: 2vw;
+    color: #999;
+}
+.count::after{
+    content: attr(count);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.546667rem;
+    width: 15.466667vw;
+    color: currentColor;
+    font-size: .533333rem;
+    line-height: .746667rem;
+    line-height: 7.466667vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+}
+.menu::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+}
+.submenu{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 0 .4rem 0 .56rem;
+    padding: 0 4vw 0 5.6vw;
+    background: #fff;
+    display: none;
+}
+.menu-item--sub.active{
+    font-weight: 700;
+}
+.menu-item--sub.active .menu-name{
+    color: #2395ff;
+}
+.submenu span{
+    vertical-align: middle;
+}
+.menu-item--sub.active .count{
+    background-color: #2395ff;
+    border-color: #2395ff;
+    color: #fff;
 }
 </style>
