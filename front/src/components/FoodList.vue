@@ -548,6 +548,11 @@ export default {
             $(event.currentTarget).addClass("active");
             $(".filter-category").removeClass("open");
             $(".filtermodal").hide();
+            var index=$(event.currentTarget).parent().index()-1;
+            var big_category=$(".main-menu").children(".menu-item:eq("+index+")").children(".menu-name").text();
+            this.$axios.get("http://localhost:3000/storeList/getByCategory?category="+$(event.currentTarget).children(".menu-name").text()+"&big_category="+big_category).
+            then(res=>{this.storeList=res.data});
+            document.documentElement.style.overflow='scroll';
         }
     },
     mounted(){
@@ -567,7 +572,7 @@ export default {
     },
     beforeMount(){
         if(!this.isShow){
-            this.$axios.get("http://localhost:3000/storeList").then(res=>{
+            this.$axios.get("http://localhost:3000/storeList?big_category=美食").then(res=>{
                 this.storeList=res.data;
             });
         }
