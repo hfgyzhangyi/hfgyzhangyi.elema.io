@@ -212,7 +212,8 @@
         </div>
         <div class="filtermodal" style="display: none;"></div>
         <section class="shoplist">
-            <section class="shop-wrap" v-for="(item,i) of storeList" :key="i">
+            <section class="shop-wrap" v-for="(item,i) of storeList" :key="i" @click="toDetail($event)">
+                <input type="hidden" name="id" :value="item.id"/>
                 <div class="shop-wrap-div1">
                     <div class="image-wrap">
                         <img :src="require('../assets/images/home/'+item.store_pic)"/>
@@ -553,6 +554,9 @@ export default {
             this.$axios.get("http://localhost:3000/storeList/getByCategory?category="+$(event.currentTarget).children(".menu-name").text()+"&big_category="+big_category).
             then(res=>{this.storeList=res.data});
             document.documentElement.style.overflow='scroll';
+        },
+        toDetail(event){
+            this.$router.push({name:"Detail",params:{id:$(event.currentTarget).children("input[type='hidden']").val()}});
         }
     },
     mounted(){

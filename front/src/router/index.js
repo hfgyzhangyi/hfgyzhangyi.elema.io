@@ -9,6 +9,7 @@ import Position from '@/components/Position'
 import Login from '@/components/Login'
 import Search from '@/components/Search'
 import FoodList from '@/components/FoodList'
+import Detail from '@/components/Detail'
 
 Vue.use(Router)
 const originalPush=Router.prototype.push;
@@ -81,6 +82,11 @@ export default new Router({
       path: '/FoodList',
       name: 'FoodList',
       component: FoodList
+    },
+    {
+      path: '/Detail',
+      name: 'Detail',
+      component: Detail
     }
   ]
 })
