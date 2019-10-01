@@ -556,7 +556,10 @@ export default {
             document.documentElement.style.overflow='scroll';
         },
         toDetail(event){
-            this.$router.push({name:"Detail",params:{id:$(event.currentTarget).children("input[type='hidden']").val()}});
+            var id=$(event.currentTarget).children("input[type='hidden']").val();
+            if(id==5){
+                this.$router.push({name:"Detail",params:{id:id}});
+            }
         }
     },
     mounted(){
