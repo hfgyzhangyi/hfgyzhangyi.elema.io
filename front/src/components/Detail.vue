@@ -62,6 +62,97 @@
                     </div>
                 </div>
             </div>
+            <div id="shoptab" style="position: sticky; top: 0px; z-index: 2;">
+                <div class="shop-tab-wrap">
+                    <div class="shop-tab-div shop-tab-focus" @click="clickShopTab($event)">
+                        <p class="shop-tab-p">
+                            点餐
+                            <span class="shop-tab-span" style="background-color: rgb(35, 149, 255);"></span>
+                        </p>
+                    </div>
+                    <div class="shop-tab-div" @click="clickShopTab($event)">
+                        <p class="shop-tab-p">
+                            评价
+                            <span class="shop-tab-span" style="background-color: rgb(35, 149, 255);"></span>
+                        </p>
+                    </div>
+                    <div class="shop-tab-div" @click="clickShopTab($event)">
+                        <p class="shop-tab-p">
+                            商家
+                            <span class="shop-tab-span" style="background-color: rgb(35, 149, 255);"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="book info"></div>
+            <div class="appraise info" style="display:none;"></div>
+            <div class="shop-info info" style="display:none;">
+                <section class="section">
+                    <h3 class="section-title">配送信息</h3>
+                    <div class="delivery">
+                        <div>
+                            <span>由蜂鸟快送提供配送，约34分钟送达，距离1.0km</span>
+                        </div>
+                        <div>配送费￥3.5</div>
+                    </div>
+                </section>
+                <section class="section">
+                    <h3 class="section-title">商家服务</h3>
+                    <div class="activity">
+                        <div class="activity-div activity-div-other1">
+                            <span class="activity-mini-tag activity-mini-tag-other1" style="border: 1px solid rgb(153, 153, 153);">
+                                赔
+                                <span class="activity-mini-tag-inner activity-mini-tag-inner-other1" style="color: rgb(153, 153, 153);">赔</span>
+                            </span>
+                            <span class="activity-text">商家原因导致订单取消，赔付代金券</span>
+                        </div>
+                        <div class="activity-div activity-div-other1">
+                            <span class="activity-mini-tag activity-mini-tag-other1" style="border: 1px solid rgb(153, 153, 153);">
+                                保
+                                <span class="activity-mini-tag-inner activity-mini-tag-inner-other1" style="color: rgb(153, 153, 153);">保</span>
+                            </span>
+                            <span class="activity-text">该商户食品安全已由国泰产险承担，食品安全有保障</span>
+                        </div>
+                        <div class="activity-div activity-div-other1">
+                            <span class="activity-mini-tag activity-mini-tag-other1" style="border: 1px solid rgb(153, 153, 153);">
+                                票
+                                <span class="activity-mini-tag-inner activity-mini-tag-inner-other1" style="color: rgb(153, 153, 153);">票</span>
+                            </span>
+                            <span class="activity-text">该商家支持开发票，开票订单金额100.00元起，请在下单时填写好发票抬头</span>
+                        </div>
+                    </div>
+                </section>
+                <div>
+                    <section class="section">
+                        <h3 class="section-title">商家信息</h3>
+                        <ul class="detail-ul">
+                            <li>{{item.info}}</li>
+                            <li>
+                                <span>品类</span>
+                                <span>{{item.category}}</span>
+                            </li>
+                            <li>
+                                <span>商家电话</span>
+                                <span class="detail-span">
+                                    <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#phone"><svg viewBox="0 0 16 16" id="phone" width="100%" height="100%"><g fill="none" fill-rule="evenodd"><path fill="#FFF" d="M-286-743H89V467h-375z"></path><path fill="#00A6FF" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-1 0A7 7 0 1 0 1 8a7 7 0 0 0 14 0zm-3.287 3.613a.424.424 0 0 1-.29.343c-.853.272-3.123-.733-4.883-2.486-1.76-1.753-2.769-4.014-2.496-4.865a.425.425 0 0 1 .344-.288l1.88-.312h.002l.015-.003c.085-.013.177.034.229.115.148.236.524.902.827 1.437.197.35.361.64.403.706.086.138.077.301-.02.399l-.8.796a.723.723 0 0 0 0 1.025l.61.607a.73.73 0 0 0 1.029 0l.799-.796c.098-.098.262-.106.4-.02l2.043 1.27a.397.397 0 0 1 .191.385l-.283 1.687z"></path></g></svg></use></svg>
+                                    <span>联系商家</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>地址</span>
+                                <span>{{item.store_address}}</span>
+                            </li>
+                            <li>
+                                <span>营业时间</span>
+                                <span>16:00-03:00</span>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="section">
+                        <a href="javascript:;" class="section-title">营业资质</a>
+                    </section>
+                </div>
+            </div>
         </div>
   </div>
 </template>
@@ -75,6 +166,19 @@ export default {
     methods:{
         back(){
             history.go(-1);
+        },
+        clickShopTab(event){
+            var index=$(event.currentTarget).index();
+            $(".shop-tab-focus").removeClass("shop-tab-focus");
+            $(event.currentTarget).addClass("shop-tab-focus");
+            $(".info").hide();
+            if(index==0){
+                $(".book").show();
+            }else if(index==1){
+                $(".appraise").show();
+            }else{
+                $(".shop-info").show();
+            }
         }
     },
     beforeCreate(){
@@ -403,5 +507,177 @@ export default {
     margin: 2.266667vw auto 2.666667vw;
     padding: 0;
     white-space: nowrap;
+}
+.shop-tab-wrap{
+    line-height: 1.066667rem;
+    line-height: 10.666667vw;
+    display: -webkit-flex;
+    display: flex;
+    background-color: #fff;
+}
+.shop-tab-div{
+    position: relative;
+    -webkit-flex: 1;
+    flex: 1;
+    text-align: center;
+    font-size: .4rem;
+    color: #666;
+    border-bottom: 1px solid #ebebeb;
+}
+.shop-tab-focus .shop-tab-p{
+    display: inline-block;
+    position: relative;
+    color: #333;
+    font-weight: 700;
+}
+.shop-tab-focus .shop-tab-span{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: .053333rem;
+    height: .533333vw;
+    background-color: #2395ff;
+}
+.shop-info{
+    background-color: #f5f5f5;
+    font-size: .346667rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.shop-info .section{
+    margin-bottom: .266667rem;
+    margin-bottom: 2.666667vw;
+    padding: .426667rem .4rem .4rem;
+    padding: 4.266667vw 4vw 4vw;
+    font-size: .346667rem;
+    background-color: #fff;
+    color: #666;
+    border-bottom: 1px solid #eee;
+}
+.shop-info .section-title{
+    color: #000;
+    font-weight: 700;
+    font-size: .4rem;
+    line-height: .56rem;
+    line-height: 5.6vw;
+}
+.delivery{
+    margin-top: .426667rem;
+    margin-top: 4.266667vw;
+}
+.delivery>div{
+    margin-bottom: .186667rem;
+    margin-bottom: 1.866667vw;
+}
+.activity{
+    margin-top: .426667rem;
+    margin-top: 4.266667vw;
+}
+.activity-div{
+    display: -webkit-flex;
+    display: flex;
+    font-size: .346667rem;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.activity-div-other1{
+    margin-bottom: .306667rem;
+    margin-bottom: 3.066667vw;
+}
+.activity-mini-tag{
+    position: relative;
+    font-size: .266667rem;
+    color: transparent;
+    white-space: nowrap;
+}
+.activity-mini-tag-other1{
+    margin-right: .16rem;
+    margin-right: 1.6vw;
+    font-size: .24rem;
+    padding: .053333rem .12rem;
+    padding: .533333vw 1.2vw;
+    height: .346667rem;
+    height: 3.466667vw;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: .026667rem;
+    border-radius: .266667vw;
+}
+.activity-div-other1 .activity-mini-tag-other1{
+    height: .426667rem;
+    height: 4.266667vw;
+    padding: .053333rem .16rem;
+    padding: .533333vw 1.6vw;
+}
+.activity-mini-tag-inner{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: -100%;
+    bottom: -100%;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    font-size: .533333rem;
+}
+.activity-mini-tag-inner-other1{
+    font-size: .48rem!important;
+    color: #fff;
+}
+.activity-div-other1 .activity-mini-tag-inner-other1{
+    font-size: .64rem!important;
+}
+.activity-text{
+    -webkit-flex: 1;
+    flex: 1;
+    font-size: .293333rem;
+    font-size: .346667rem;
+    line-height: 1.38;
+}
+.detail-ul li{
+    display: -webkit-flex;
+    display: flex;
+    padding: .4rem .4rem .4rem 0;
+    padding: 4vw 4vw 4vw 0;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-right: -.4rem;
+    margin-right: -4vw;
+}
+.detail-ul li:not(:first-child){
+    border-top: 1px solid #ddd;
+}
+.detail-ul li>span:first-child{
+    font-weight: 700;
+    color: #333;
+}
+.detail-ul li>span:last-child{
+    max-width: 6.666667rem;
+    max-width: 66.666667vw;
+    text-align: right;
+}
+.detail-span{
+    display: -webkit-flex;
+    display: flex;
+    color: #00a6ff;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.detail-span svg{
+    width: .5rem;
+    height: .5rem;
+    margin-right: .133333rem;
+    margin-right: 1.333333vw;
 }
 </style>
