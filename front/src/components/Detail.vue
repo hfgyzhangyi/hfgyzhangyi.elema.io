@@ -85,7 +85,41 @@
                 </div>
             </div>
             <div class="book info"></div>
-            <div class="appraise info" style="display:none;"></div>
+            <div class="appraise info" style="display:none;">
+                <div class="appraise-wrap">
+                    <ul>
+                        <li class="appraise-li" v-for="(appraise,j) of appraise_list" :key="j">
+                            <div class="comment-block">
+                                <div class="sculpture-div-other1 sculpture-div" style="width: 30px; height: 30px;">
+                                    <span style="background-size: 30px;background-position: 0px 60px;"></span>
+                                </div>
+                                <div class="content-div">
+                                    <div class="content-div-div1">
+                                        <h3 class="content-div-div1-h3">{{appraise.name}}</h3>
+                                        <small class="content-div-div1-small">{{appraise.time}}</small>
+                                    </div>
+                                    <div class="content-div-div2">
+                                        <div class="Rating-wrapper">
+                                            <div class="Rating-gray">
+                                                <img :src="appraise.estimate==4.7?require('../assets/images/home/star4.7.png'):require('../assets/images/home/star4.9.png')">
+                                            </div>
+                                        </div>
+                                        <span class="content-div-div2-span" style="color: rgb(255, 96, 0);">
+                                            超赞
+                                        </span>
+                                    </div>
+                                    <div class="content-div-div3">
+                                        {{appraise.comment}}
+                                    </div>
+                                    <div class="content-div-div4">
+                                        {{appraise.response}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="shop-info info" style="display:none;">
                 <section class="section">
                     <h3 class="section-title">配送信息</h3>
@@ -160,7 +194,8 @@
 export default {
     data(){
         return{
-            data:''
+            data:'',
+            appraise_list:''
         }
     },
     methods:{
@@ -184,6 +219,7 @@ export default {
     beforeCreate(){
         var id=this.$route.params.id;
         this.$axios.get("http://localhost:3000/detail?id="+id).then(res=>{this.data=res.data});
+        this.$axios.get("http://localhost:3000/appraise?store_id="+id).then(res=>{this.appraise_list=res.data});
     }
 }
 </script>
@@ -679,5 +715,128 @@ export default {
     height: .5rem;
     margin-right: .133333rem;
     margin-right: 1.333333vw;
+}
+.appraise-wrap{
+    background-color: #fff;
+    padding: .266667rem .32rem 0;
+    padding: 2.666667vw 3.2vw 0;
+    font-size: .36rem;
+}
+.appraise-li{
+    padding: .4rem 0 .32rem;
+    padding: 4vw 0 3.2vw;
+    border-bottom: .013333rem solid #eee;
+    border-bottom: .133333vw solid #eee;
+}
+.comment-block{
+    position: relative;
+    padding-left: 1.066667rem;
+    padding-left: 10.666667vw;
+}
+.sculpture-div-other1{
+    border-radius: 50%;
+}
+.sculpture-div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: .8rem;
+    width: 8vw;
+    height: .8rem;
+    height: 8vw;
+    border-radius: 50%;
+}
+.sculpture-div-other1>img, .sculpture-div-other1>span{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+.sculpture-div-other1>span{
+    display: inline-block;
+    background: url("../assets/images/detail/sculpture.png");
+}
+.content-div{
+    font-size: .346667rem;
+}
+.content-div-div1{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.content-div-div1-h3{
+    font-size: .346667rem;
+    margin-top: 0;
+    color: #333;
+    margin-right: .16rem;
+    margin-right: 1.6vw;
+}
+.content-div-div1-small{
+    font-size: .293333rem;
+    color: #999;
+}
+.content-div-div2{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    margin: .16rem 0 .053333rem;
+    margin: 1.6vw 0 .533333vw;
+}
+.Rating-wrapper{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+.Rating-gray{
+    display: -webkit-flex;
+    display: flex;
+}
+.Rating-gray img{
+    width: 1.493333rem;
+    width: 14.933333vw;
+    height: .266667rem;
+    height: 2.666667vw;
+    -webkit-flex: none;
+    flex: none;
+    max-width: none;
+}
+.content-div-div2-span{
+    font-size: .293333rem;
+    margin-left: .106667rem;
+    margin-left: 1.066667vw;
+}
+.content-div-div3{
+    color: #333;
+    font-size: .373333rem;
+    word-break: break-word;
+    margin: .213333rem 0;
+    margin: 2.133333vw 0;
+}
+.content-div-div4{
+    position: relative;
+    margin: .266667rem 0;
+    margin: 2.666667vw 0;
+    padding: .266667rem;
+    padding: 2.666667vw;
+    background: #f3f3f3;
+    border-radius: .106667rem;
+    border-radius: 1.066667vw;
+}
+.content-div-div4::after{
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: .4rem;
+    left: 4vw;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 .213333rem .213333rem;
+    border-width: 0 2.133333vw 2.133333vw;
+    border-color: transparent transparent #f3f3f3;
 }
 </style>
