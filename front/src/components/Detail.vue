@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div id="shoptab" style="position: sticky; top: 0px; z-index: 2;">
+            <div id="shoptab" style="position: sticky; top: 0px; z-index: 200;">
                 <div class="shop-tab-wrap">
                     <div class="shop-tab-div shop-tab-focus" @click="clickShopTab($event)">
                         <p class="shop-tab-p">
@@ -84,7 +84,32 @@
                     </div>
                 </div>
             </div>
-            <div class="book info"></div>
+            <div class="book info">
+                <div class="book_index">
+                    <div class="menuview">
+                        <div class="menuviewMain">
+                            <main class="main">
+                                <div class="menucategory menuNav">
+                                    <ul class="menucategory-categoryWrapper">
+                                        <li class="menucategory-categoryItem" v-for="(category,h) of category_list" :key="h" :class="h==0?'menucategory-active':''" @click="clickCategory($event)">
+                                            <img class="menucategory-categoryIcon" v-if="category.category=='必选品\r\n(辣度选择)'" src="../assets/images/detail/19.jpg"/>
+                                            <img class="menucategory-categoryIcon" v-else-if="category.category=='热销'" src="../assets/images/detail/20.jpg"/>
+                                            <img class="menucategory-categoryIcon" v-else-if="category.category=='折扣同享'" src="../assets/images/detail/21.jpg"/>
+                                            <span class="menucategory-categoryName">{{category.category}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ul class="container menuview-menuList">
+                                    <my-li v-for="(dish,z) of dishes_list" :key="z" :id="dish.id" :category="dish.category" :pic_name="dish.pic_name" :des="dish.des" :sales="dish.sales" :original_price="dish.original_price" :low_number="dish.low_number" :feedback_rate="dish.feedback_rate">
+                                        <template slot="name">{{dish.name}}</template>
+                                        <template slot="price">{{dish.price}}</template>
+                                    </my-li>
+                                </ul>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="appraise info" style="display:none;">
                 <div class="appraise-wrap">
                     <ul>
@@ -195,7 +220,10 @@ export default {
     data(){
         return{
             data:'',
-            appraise_list:''
+            appraise_list:'',
+            category_list:'',
+            dishes_list:'',
+            store_id:0
         }
     },
     methods:{
@@ -203,23 +231,47 @@ export default {
             history.go(-1);
         },
         clickShopTab(event){
-            var index=$(event.currentTarget).index();
+            var index1=$(event.currentTarget).index();
+            var index2=$(".shop-tab-focus").index();
             $(".shop-tab-focus").removeClass("shop-tab-focus");
             $(event.currentTarget).addClass("shop-tab-focus");
-            $(".info").hide();
-            if(index==0){
+            if(index1==0&&index1!=index2){
+                $(".info").hide();
                 $(".book").show();
-            }else if(index==1){
+                document.documentElement.scrollTop=0;
+            }else if(index1==1&&index1!=index2){
+                $(".info").hide();
                 $(".appraise").show();
-            }else{
+                document.documentElement.scrollTop=0;
+            }else if(index1==2&&index1!=index2){
+                $(".info").hide();
                 $(".shop-info").show();
+                document.documentElement.scrollTop=0;
             }
+        },
+        clickCategory(event){
+            $(".menucategory-active").removeClass("menucategory-active");
+            $(event.currentTarget).addClass("menucategory-active");
         }
     },
     beforeCreate(){
-        var id=this.$route.params.id;
-        this.$axios.get("http://localhost:3000/detail?id="+id).then(res=>{this.data=res.data});
-        this.$axios.get("http://localhost:3000/appraise?store_id="+id).then(res=>{this.appraise_list=res.data});
+        this.store_id=this.$route.params.id;
+        this.$axios.get("http://localhost:3000/detail?id="+this.store_id).then(res=>{this.data=res.data});
+        this.$axios.get("http://localhost:3000/appraise?store_id="+this.store_id).then(res=>{this.appraise_list=res.data});
+        this.$axios.get("http://localhost:3000/detail/getCategory?store_id="+this.store_id).then(res=>this.category_list=res.data);
+        this.$axios.get("http://localhost:3000/detail/getDishes?store_id="+this.store_id).then(res=>{
+            this.dishes_list=res.data;
+            setTimeout(function(){
+                var inputs=$(".container").children("li").find("input[name=category]");
+                var temp_category="";
+                for(var i=0;i<inputs.length;i++){
+                    if(i==0){
+                        temp_category=inputs[i].value;
+                        continue;
+                    }
+                }
+            },150);
+        });
     }
 }
 </script>
@@ -838,5 +890,90 @@ export default {
     border-width: 0 .213333rem .213333rem;
     border-width: 0 2.133333vw 2.133333vw;
     border-color: transparent transparent #f3f3f3;
+}
+.book_index{
+    position: relative;
+    z-index: 3;
+}
+.menuview{
+    height: 100%;
+    box-sizing: border-box;
+}
+.menuviewMain{
+    height: 100%;
+    padding-bottom: 1.28rem;
+    padding-bottom: 12.8vw;
+    background-color: #fff;
+}
+.main{
+    display: -webkit-flex;
+    display: flex;
+    height: 100%;
+}
+.menuNav{
+    width: 2.053333rem;
+    width: 20.533333vw;
+    height: 100%;
+}
+.menucategory{
+    overflow-y: auto;
+    height: 100%;
+    background-color: #f8f8f8;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1.066667rem;
+    padding-bottom: 10.666667vw;
+}
+.menuview .menucategory-categoryWrapper{
+    -webkit-flex: none;
+    flex: none;
+    position: relative;
+    z-index: 0;
+    height: 441px;
+}
+.menucategory::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
+.menucategory-categoryItem{
+    position: relative;
+    padding: .466667rem .2rem;
+    padding: 4.666667vw 2vw;
+    font-size: .32rem;
+    color: #666;
+}
+.menucategory-categoryName{
+    line-height: 1.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+}
+.menucategory-categoryIcon{
+    width: .346667rem;
+    width: 3.466667vw;
+    height: .346667rem;
+    height: 3.466667vw;
+    vertical-align: top;
+    margin-right: .08rem;
+    margin-right: .8vw;
+    max-width: 100%;
+}
+.menucategory-categoryItem.menucategory-active{
+    color: #333;
+    background-color: #fff;
+}
+.container{
+    position: relative;
+    height: 100%;
+}
+.menuview-menuList{
+    height: 100%;
+    width: 7.946667rem;
+    width: 79.466667vw;
+    overflow-y: auto;
+    height: 480px;
+}
+.menuview-menuList::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
 }
 </style>

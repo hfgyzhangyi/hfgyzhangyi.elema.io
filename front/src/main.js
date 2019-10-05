@@ -7,12 +7,14 @@ import Vuex from 'vuex'
 import 'mint-ui/lib/style.css'
 import './assets/css/global.css'
 import './assets/css/my-mint.css'
-import './assets/js/global.js';
+import './assets/js/global.js'
+import MyLi from '@/components/MyLi'
 
 Vue.use(MintUI);
 Vue.use(Vuex);
 Vue.config.productionTip = false
 Vue.prototype.$axios=axios;
+Vue.component(MyLi.name,MyLi);
 var store=new Vuex.Store({
   state:{
     navTabSelected:"首页"

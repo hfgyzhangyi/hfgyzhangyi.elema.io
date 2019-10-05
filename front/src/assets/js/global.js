@@ -23,6 +23,9 @@
             $(".mint-tab-item:eq(3)").addClass("is-selected");
         }
     },false);
+    window.addEventListener("load",function(e){
+        setTimeout(()=>window.scrollTo(0,0),150);
+    });
     jQuery.fn.isChildOf=function(b){
         return (this.parents(b).length>0);
     }

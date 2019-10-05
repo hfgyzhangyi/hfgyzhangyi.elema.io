@@ -13,4 +13,26 @@ router.get("/",(req,res)=>{
 		}
 	});
 });
+router.get("/getCategory",(req,res)=>{
+	var store_id=req.query.store_id;
+	var sql="select distinct category from dishes where store_id=?";
+	pool.query(sql,[store_id],(err,result)=>{
+		if(result!=""){
+			res.send(result);
+		}else{
+			res.send(null);
+		}
+	});
+});
+router.get("/getDishes",(req,res)=>{
+	var store_id=req.query.store_id;
+	var sql="select * from dishes where store_id=?";
+	pool.query(sql,[store_id],(err,result)=>{
+		if(result!=""){
+			res.send(result);
+		}else{
+			res.send(null);
+		}
+	});
+});
 module.exports=router;
