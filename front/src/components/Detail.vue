@@ -100,10 +100,10 @@
                                     </ul>
                                 </div>
                                 <ul class="container menuview-menuList">
-                                    <my-li v-for="(dish,z) of dishes_list" :key="z" :id="dish.id" :category="dish.category" :pic_name="dish.pic_name" :des="dish.des" :sales="dish.sales" :original_price="dish.original_price" :low_number="dish.low_number" :feedback_rate="dish.feedback_rate">
+                                    <my-li-1 v-for="(dish,z) of dishes_list" :key="z" :id="dish.id" :category="dish.category" :pic_name="dish.pic_name" :des="dish.des" :sales="dish.sales" :original_price="dish.original_price" :low_number="dish.low_number" :feedback_rate="dish.feedback_rate">
                                         <template slot="name">{{dish.name}}</template>
                                         <template slot="price">{{dish.price}}</template>
-                                    </my-li>
+                                    </my-li-1>
                                 </ul>
                             </main>
                         </div>

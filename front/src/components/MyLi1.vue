@@ -29,7 +29,15 @@
                     <span>
                         <span class="cartbutton-minPurchase" v-if="low_number!=1">{{low_number}}份起售</span>
                         <span class="cartbutton-entitybutton">
-                            <a href="javascript:">
+                            <a href="javascript:;" style="display:none;" @click="minus($event)">
+                                <svg style="fill: rgb(35, 149, 255);">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add">
+                                        <svg viewBox="0 0 44 44" id="cart-add" width="100%" height="100%"><path fill-rule="evenodd" d="M22 0C9.8 0 0 9.8 0 22s9.8 22 22 22 22-9.8 22-22S34.2 0 22 0zm0 42C11 42 2 33 2 22S11 2 22 2s20 9 20 20-9 20-20 20z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M32 20c1.1 0 2 .9 2 2s-.9 2-2 2H12c-1.1 0-2-.9-2-2s.9-2 2-2h20z" clip-rule="evenodd"></path></svg>
+                                    </use>
+                                </svg>
+                            </a>
+                            <span class="cartbutton-entityquantity"></span>
+                            <a href="javascript:;" @click="plus($event)">
                                 <svg style="fill: rgb(35, 149, 255);">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-minus">
                                         <svg viewBox="0 0 44 44" id="cart-minus" width="100%" height="100%"><path fill="none" d="M0 0h44v44H0z"></path><path fill-rule="evenodd" d="M22 0C9.8 0 0 9.8 0 22s9.8 22 22 22 22-9.8 22-22S34.2 0 22 0zm10 24h-8v8c0 1.1-.9 2-2 2s-2-.9-2-2v-8h-8c-1.1 0-2-.9-2-2s.9-2 2-2h8v-8c0-1.1.9-2 2-2s2 .9 2 2v8h8c1.1 0 2 .9 2 2s-.9 2-2 2z" clip-rule="evenodd"></path></svg>
@@ -45,8 +53,28 @@
 </template>
 <script>
 export default {
-    name:'my-li',
-    props:["id","name","pic_name","price","original_price","feedback_rate","sales","des","low_number","category"]
+    name:'my-li-1',
+    props:["id","name","pic_name","price","original_price","feedback_rate","sales","des","low_number","category"],
+    methods:{
+        plus(event){
+            var number=$(event.currentTarget).siblings(".cartbutton-entityquantity").text();
+            if(number==""){
+                $(event.currentTarget).siblings(".cartbutton-entityquantity").text("1");
+                $(event.currentTarget).parent().children("a:eq(0)").show();
+            }else{
+                $(event.currentTarget).siblings(".cartbutton-entityquantity").text(parseInt(number)+1);
+            }
+        },
+        minus(event){
+            var number=$(event.currentTarget).siblings(".cartbutton-entityquantity").text();
+            if(number=="1"){
+                $(event.currentTarget).siblings(".cartbutton-entityquantity").text("");
+                $(event.currentTarget).parent().children("a:eq(0)").hide();
+            }else{
+                $(event.currentTarget).siblings(".cartbutton-entityquantity").text(parseInt(number)-1);
+            }
+        }
+    }
 }
 </script>
 <style scoped>
@@ -201,5 +229,15 @@ li{
 .cartbutton-minPurchase{
     font-size: .266667rem;
     color: #666;
+}
+.cartbutton-entityquantity{
+    display: inline-block;
+    text-align: center;
+    color: rgba(0,0,0,.87);
+    vertical-align: middle;
+    font-size: .373333rem;
+    width: .693333rem;
+    width: 6.933333vw;
+    overflow: hidden;
 }
 </style>
