@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div id="shoptab" style="position: sticky; top: 0px; z-index: 200;">
+            <div id="shoptab" style="position: sticky; top: 0px;">
                 <div class="shop-tab-wrap">
                     <div class="shop-tab-div shop-tab-focus" @click="clickShopTab($event)">
                         <p class="shop-tab-p">
@@ -92,19 +92,56 @@
                                 <div class="menucategory menuNav">
                                     <ul class="menucategory-categoryWrapper">
                                         <li class="menucategory-categoryItem" v-for="(category,h) of category_list" :key="h" :class="h==0?'menucategory-active':''" @click="clickCategory($event)">
-                                            <img class="menucategory-categoryIcon" v-if="category.category=='必选品\r\n(辣度选择)'" src="../assets/images/detail/19.jpg"/>
+                                            <img class="menucategory-categoryIcon" v-if="category.category=='必选品(辣度选择)'" src="../assets/images/detail/19.jpg"/>
                                             <img class="menucategory-categoryIcon" v-else-if="category.category=='热销'" src="../assets/images/detail/20.jpg"/>
                                             <img class="menucategory-categoryIcon" v-else-if="category.category=='折扣同享'" src="../assets/images/detail/21.jpg"/>
                                             <span class="menucategory-categoryName">{{category.category}}</span>
                                         </li>
                                     </ul>
                                 </div>
-                                <ul class="container menuview-menuList">
+                                <ul class="container menuview-menuList" id="container">
                                     <my-li-1 v-for="(dish,z) of dishes_list" :key="z" :id="dish.id" :category="dish.category" :pic_name="dish.pic_name" :des="dish.des" :sales="dish.sales" :original_price="dish.original_price" :low_number="dish.low_number" :feedback_rate="dish.feedback_rate">
                                         <template slot="name">{{dish.name}}</template>
                                         <template slot="price">{{dish.price}}</template>
                                     </my-li-1>
                                 </ul>
+                                <div>
+                                    <div class="specpanel-mask" style="display:none;" @click="clickSpecpanelMask($event)"></div>
+                                    <div class="specpanel-root" style="display:none;">
+                                        <div class="specpanel-main">
+                                            <a href="javascript:;" class="specpanel-close" @click="closeSpecpanel($event)"></a>
+                                            <div class="specpanel-header">
+                                                <img class="specpanel-pic" src="../assets/images/detail/4.jpg">
+                                                <div class="specpanel-info">
+                                                    <p class="specpanel-name">辣度选择</p>
+                                                    <p class="specpanel-total">已选：不辣！不辣！/要餐具</p>
+                                                    <p class="specpanel-price" style="color: rgb(255, 83, 57);">
+                                                        <small>¥</small>0
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="specpanel-body">
+                                                <div>
+                                                    <p class="specpanel-colTitle">规格</p>
+                                                    <div class="specpanel-colBody">
+                                                        <span class="panel-item-item panel-item-active" @click="panelItemClick($event)">不辣！不辣！</span>
+                                                        <span class="panel-item-item" @click="panelItemClick($event)">微辣！微辣！</span>
+                                                        <span class="panel-item-item" @click="panelItemClick($event)">中辣！中辣！</span>
+                                                        <span class="panel-item-item" @click="panelItemClick($event)">重辣！重辣！</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p class="specpanel-colTitle">餐具选择</p>
+                                                    <div class="specpanel-colBody">
+                                                        <span class="panel-item-item panel-item-active" @click="panelItemClick($event)">要餐具</span>
+                                                        <span class="panel-item-item" @click="panelItemClick($event)">环保单(不要餐具)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="specpanel-doneBtn" @click="clickSpecpanelBtn($event)" style="background-color: rgb(35, 149, 255);">选好了</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </main>
                         </div>
                     </div>
@@ -250,8 +287,69 @@ export default {
             }
         },
         clickCategory(event){
+            $("#container").unbind("scroll",this.scroll);
             $(".menucategory-active").removeClass("menucategory-active");
             $(event.currentTarget).addClass("menucategory-active");
+            var text=$(event.currentTarget).children(".menucategory-categoryName").text();
+            if(text=="必选品(辣度选择)"){
+                text="辣度选择";
+            }
+            var c_top=$("#"+text).position().top;
+            var f_scrollTop=$(".container").scrollTop();
+            if(c_top<0){
+                $(".container").animate({scrollTop:c_top+(f_scrollTop-11)},100,function(){
+                    $("#container").bind("scroll",this.scroll);
+                });
+            }else{
+                $(".container").animate({scrollTop:(c_top-11)+f_scrollTop},100,function(){
+                    $("#container").bind("scroll",this.scroll);
+                });
+            }
+        },
+        closeSpecpanel(event){
+            $(".specpanel-root").hide();
+            $(".specpanel-mask").hide();
+            $(".specpanel-root").animate({"height":"0px"},0);
+            $("#shoptab").css("zIndex",5);
+        },
+        clickSpecpanelMask(event){
+            $(".specpanel-root").hide();
+            $(".specpanel-mask").hide();
+            $(".specpanel-root").animate({"height":"0px"},0);
+            $("#shoptab").css("zIndex",5);
+        },
+        panelItemClick(event){
+            if($(event.currentTarget).parent().siblings(".specpanel-colTitle").text()=="规格"){
+                $(".panel-item-active:eq(0)").removeClass("panel-item-active");
+                $(event.currentTarget).addClass("panel-item-active");
+            }else{
+                $(".panel-item-active:eq(1)").removeClass("panel-item-active");
+                $(event.currentTarget).addClass("panel-item-active");
+            }
+            $(".specpanel-total").text("已选："+$(".panel-item-active:eq(0)").text()+"/"+$(".panel-item-active:eq(1)").text());
+        },
+        clickSpecpanelBtn(event){
+            $(".specpanel-root").hide();
+            $(".specpanel-mask").hide();
+            $(".specpanel-root").animate({"height":"0px"},0);
+            $("#shoptab").css("zIndex",5);
+        },
+        scroll(){
+            for(var i=0;i<this.category_list.length;i++){
+                var category=this.category_list[i].category;
+                if(category=="必选品(辣度选择)"){
+                    category="辣度选择";
+                }
+                //标题相对于父元素顶部距离
+                var top1=$("#"+category).position().top;
+                //列表中同一分类最后一个li相对于父元素顶部距离
+                var top2=$("input[data-category='"+this.category_list[i].category+"']").last().parent().parent().position().top+115;
+                if(top1<0&&top2>0){
+                    $(".menucategory-active").removeClass("menucategory-active");
+                    $(".menucategory-categoryItem:eq("+i+")").addClass("menucategory-active");
+                    break;
+                }
+            }
         }
     },
     beforeCreate(){
@@ -266,12 +364,27 @@ export default {
                 var temp_category="";
                 for(var i=0;i<inputs.length;i++){
                     if(i==0){
-                        temp_category=inputs[i].value;
+                        temp_category=inputs[0].value;
+                        $("<strong id='"+temp_category+"' style='margin-right:.133333rem;margin-right:1.333333vw;font-weight:700;font-size:.32rem;color:#666;-webkit-flex:none;flex:none;padding-left:.266667rem;padding-left:2.666667vw;'>"+temp_category+"</strong>").insertBefore($(inputs[0]).parent().parent());
                         continue;
+                    }else{
+                        if(inputs[i].value!=temp_category){
+                            temp_category=inputs[i].value;
+                            if(temp_category=="必选品(辣度选择)"){
+                                temp_category="辣度选择";
+                            }
+                            $("<strong id='"+temp_category+"' style='margin-right:.133333rem;margin-right:1.333333vw;font-weight:700;font-size:.32rem;color:#666;-webkit-flex:none;flex:none;padding-left:.266667rem;padding-left:2.666667vw;'>"+temp_category+"</strong>").insertBefore($(inputs[i]).parent().parent());
+                            continue;
+                        }
                     }
                 }
             },150);
         });
+    },
+    mounted(){
+        setTimeout(()=>{
+            $("#container").bind("scroll",this.scroll);
+        },150);
     }
 }
 </script>
@@ -975,5 +1088,151 @@ export default {
 .menuview-menuList::-webkit-scrollbar{
     width: 0px;
     height: 0px;
+}
+.specpanel-mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.4);
+    z-index: 10;
+}
+#shoptab{
+    z-index: 5;
+}
+.specpanel-root{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 14;
+    background: #fff;
+}
+.specpanel-main{
+    position: relative;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    padding: .426667rem;
+    padding: 4.266667vw;
+    height: 100%;
+}
+.specpanel-close{
+    display: block;
+    position: absolute;
+    top: .4rem;
+    top: 4vw;
+    right: .4rem;
+    right: 4vw;
+    width: .466667rem;
+    width: 4.666667vw;
+    height: .466667rem;
+    height: 4.666667vw;
+    background: url("../assets/images/detail/close.png") no-repeat;
+    background-size: cover;
+}
+.specpanel-header{
+    padding-bottom: .533333rem;
+    padding-bottom: 5.333333vw;
+    display: -webkit-flex;
+    display: flex;
+}
+.specpanel-pic{
+    -webkit-flex: none;
+    flex: none;
+    width: 2.533333rem;
+    width: 25.333333vw;
+    height: 2.533333rem;
+    height: 25.333333vw;
+    max-width: 100%;
+}
+.specpanel-info{
+    padding-left: .266667rem;
+    padding-left: 2.666667vw;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+.specpanel-name{
+    color: #333;
+    font-size: .453333rem;
+    font-weight: 700;
+    max-width: 5.333333rem;
+    max-width: 53.333333vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: .213333rem;
+    margin-bottom: 2.133333vw;
+}
+.specpanel-total{
+    -webkit-flex: 1;
+    flex: 1;
+    color: #666;
+    font-size: .293333rem;
+}
+.specpanel-price{
+    font-size: .64rem;
+    color: #2396ff;
+    font-weight: 500;
+}
+.specpanel-body{
+    -webkit-flex: 1;
+    flex: 1;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+.specpanel-colTitle{
+    color: #666;
+    font-size: .373333rem;
+    margin-bottom: .32rem;
+    margin-bottom: 3.2vw;
+}
+.specpanel-colBody{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 -.24rem;
+    margin: 0 -2.4vw;
+}
+.panel-item-item{
+    display: inline-block;
+    min-width: 2.773333rem;
+    min-width: 27.733333vw;
+    padding: 0 .266667rem;
+    padding: 0 2.666667vw;
+    min-height: .853333rem;
+    min-height: 8.533333vw;
+    border-radius: .053333rem;
+    border-radius: .533333vw;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: .346667rem;
+    text-align: center;
+    margin: 0 .213333rem .32rem;
+    margin: 0 2.133333vw 3.2vw;
+    line-height: .853333rem;
+    line-height: 8.533333vw;
+}
+.panel-item-item.panel-item-active{
+    color: #2396ff;
+    font-weight: 700;
+    background-color: rgba(35,150,255,.2);
+}
+.specpanel-doneBtn{
+    width: 100%;
+    height: 1.066667rem;
+    height: 10.666667vw;
+    color: #fff;
+    font-size: .426667rem;
+    font-weight: 700;
+    border-radius: .053333rem;
+    border-radius: .533333vw;
+    background-color: #2396ff;
 }
 </style>

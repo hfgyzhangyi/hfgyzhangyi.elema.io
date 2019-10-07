@@ -2,7 +2,7 @@
     <li>
         <div class="fooddetails-root">
             <input type="hidden" name="id" :value="id"/>
-            <input type="hidden" name="category" :value="category"/>
+            <input type="hidden" name="category" :data-category="category" :value="category"/>
             <span class="fooddetails-logo">
                 <img :src="require('../assets/images/detail/'+pic_name)"/>
             </span>
@@ -57,12 +57,22 @@ export default {
     props:["id","name","pic_name","price","original_price","feedback_rate","sales","des","low_number","category"],
     methods:{
         plus(event){
-            var number=$(event.currentTarget).siblings(".cartbutton-entityquantity").text();
-            if(number==""){
-                $(event.currentTarget).siblings(".cartbutton-entityquantity").text("1");
-                $(event.currentTarget).parent().children("a:eq(0)").show();
+            if($(event.currentTarget).parent().parent().parent().parent().find(".fooddetails-nameText").text()=="辣度选择"){
+                $("#shoptab").css("zIndex",2);
+                $(".panel-item-active").removeClass("panel-item-active");
+                $(".panel-item-item:eq(0)").addClass("panel-item-active");
+                $(".panel-item-item:eq(4)").addClass("panel-item-active");
+                $(".specpanel-mask").show();
+                $(".specpanel-root").show();
+                $(".specpanel-root").animate({"height":"146.666667vw"},200);
             }else{
-                $(event.currentTarget).siblings(".cartbutton-entityquantity").text(parseInt(number)+1);
+                var number=$(event.currentTarget).siblings(".cartbutton-entityquantity").text();
+                if(number==""){
+                    $(event.currentTarget).siblings(".cartbutton-entityquantity").text("1");
+                    $(event.currentTarget).parent().children("a:eq(0)").show();
+                }else{
+                    $(event.currentTarget).siblings(".cartbutton-entityquantity").text(parseInt(number)+1);
+                }
             }
         },
         minus(event){
