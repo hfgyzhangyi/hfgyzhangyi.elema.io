@@ -287,7 +287,6 @@ export default {
             }
         },
         clickCategory(event){
-            $("#container").unbind("scroll",this.scroll);
             $(".menucategory-active").removeClass("menucategory-active");
             $(event.currentTarget).addClass("menucategory-active");
             var text=$(event.currentTarget).children(".menucategory-categoryName").text();
@@ -297,13 +296,9 @@ export default {
             var c_top=$("#"+text).position().top;
             var f_scrollTop=$(".container").scrollTop();
             if(c_top<0){
-                $(".container").animate({scrollTop:c_top+(f_scrollTop-11)},100,function(){
-                    $("#container").bind("scroll",this.scroll);
-                });
+                $(".container").animate({scrollTop:c_top+(f_scrollTop-11)},300);
             }else{
-                $(".container").animate({scrollTop:(c_top-11)+f_scrollTop},100,function(){
-                    $("#container").bind("scroll",this.scroll);
-                });
+                $(".container").animate({scrollTop:(c_top-11)+f_scrollTop},300);
             }
         },
         closeSpecpanel(event){
@@ -335,19 +330,21 @@ export default {
             $("#shoptab").css("zIndex",5);
         },
         scroll(){
-            for(var i=0;i<this.category_list.length;i++){
-                var category=this.category_list[i].category;
-                if(category=="必选品(辣度选择)"){
-                    category="辣度选择";
-                }
-                //标题相对于父元素顶部距离
-                var top1=$("#"+category).position().top;
-                //列表中同一分类最后一个li相对于父元素顶部距离
-                var top2=$("input[data-category='"+this.category_list[i].category+"']").last().parent().parent().position().top+115;
-                if(top1<0&&top2>0){
-                    $(".menucategory-active").removeClass("menucategory-active");
-                    $(".menucategory-categoryItem:eq("+i+")").addClass("menucategory-active");
-                    break;
+            if(!$(".container").is(":animated")){
+                for(var i=0;i<this.category_list.length;i++){
+                    var category=this.category_list[i].category;
+                    if(category=="必选品(辣度选择)"){
+                        category="辣度选择";
+                    }
+                    //标题相对于父元素顶部距离
+                    var top1=$("#"+category).position().top;
+                    //列表中同一分类最后一个li相对于父元素顶部距离
+                    var top2=$("input[data-category='"+this.category_list[i].category+"']").last().parent().parent().position().top+115;
+                    if(top1<0&&top2>0){
+                        $(".menucategory-active").removeClass("menucategory-active");
+                        $(".menucategory-categoryItem:eq("+i+")").addClass("menucategory-active");
+                        break;
+                    }
                 }
             }
         }
