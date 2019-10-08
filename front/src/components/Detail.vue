@@ -249,6 +249,7 @@
                     </section>
                 </div>
             </div>
+            <detail-bottom :low_pay="item.low_pay"></detail-bottom>
         </div>
   </div>
 </template>
@@ -274,14 +275,17 @@ export default {
             $(event.currentTarget).addClass("shop-tab-focus");
             if(index1==0&&index1!=index2){
                 $(".info").hide();
+                $(".cartview-cartview").show();
                 $(".book").show();
                 document.documentElement.scrollTop=0;
             }else if(index1==1&&index1!=index2){
                 $(".info").hide();
+                $(".cartview-cartview").hide();
                 $(".appraise").show();
                 document.documentElement.scrollTop=0;
             }else if(index1==2&&index1!=index2){
                 $(".info").hide();
+                $(".cartview-cartview").hide();
                 $(".shop-info").show();
                 document.documentElement.scrollTop=0;
             }
@@ -306,12 +310,14 @@ export default {
             $(".specpanel-mask").hide();
             $(".specpanel-root").animate({"height":"0px"},0);
             $("#shoptab").css("zIndex",5);
+            $(".cartview-cartview").show();
         },
         clickSpecpanelMask(event){
             $(".specpanel-root").hide();
             $(".specpanel-mask").hide();
             $(".specpanel-root").animate({"height":"0px"},0);
             $("#shoptab").css("zIndex",5);
+            $(".cartview-cartview").show();
         },
         panelItemClick(event){
             if($(event.currentTarget).parent().siblings(".specpanel-colTitle").text()=="规格"){
@@ -328,6 +334,18 @@ export default {
             $(".specpanel-mask").hide();
             $(".specpanel-root").animate({"height":"0px"},0);
             $("#shoptab").css("zIndex",5);
+            $(".cartview-cartview").show();
+            var spicy=$(".panel-item-active:eq(0)").text();
+            var key="辣度选择";
+            var obj={name:spicy};
+            obj["info"]=$(".panel-item-active:eq(1)").text();
+            obj["number"]=1;
+            obj["price"]=0.2;
+            $("#"+key).next().find(".cartbutton-entityquantity").prev().show();
+            $("#"+key).next().find(".cartbutton-entityquantity").show();
+            $("#"+key).next().find(".cartbutton-entityquantity").text(1);
+            this.bus.$emit("add_dish",key,obj);
+            this.bus.$emit("update_dish");
         },
         scroll(){
             if(!$(".container").is(":animated")){
@@ -339,7 +357,7 @@ export default {
                     //标题相对于父元素顶部距离
                     var top1=$("#"+category).position().top;
                     //列表中同一分类最后一个li相对于父元素顶部距离
-                    var top2=$("input[data-category='"+this.category_list[i].category+"']").last().parent().parent().position().top+115;
+                    var top2=$("input[data-category='"+this.category_list[i].category+"']").last().parent().parent().position().top+110;
                     if(top1<0&&top2>0){
                         $(".menucategory-active").removeClass("menucategory-active");
                         $(".menucategory-categoryItem:eq("+i+")").addClass("menucategory-active");
@@ -1080,7 +1098,7 @@ export default {
     width: 7.946667rem;
     width: 79.466667vw;
     overflow-y: auto;
-    height: 480px;
+    height: 450px;
 }
 .menuview-menuList::-webkit-scrollbar{
     width: 0px;

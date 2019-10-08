@@ -36,7 +36,7 @@
                                     </use>
                                 </svg>
                             </a>
-                            <span class="cartbutton-entityquantity"></span>
+                            <span class="cartbutton-entityquantity" style="display:none;"></span>
                             <a href="javascript:;" @click="plus($event)">
                                 <svg style="fill: rgb(35, 149, 255);">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-minus">
@@ -58,30 +58,62 @@ export default {
     methods:{
         plus(event){
             if($(event.currentTarget).parent().parent().parent().parent().find(".fooddetails-nameText").text()=="辣度选择"){
-                $("#shoptab").css("zIndex",2);
-                $(".panel-item-active").removeClass("panel-item-active");
-                $(".panel-item-item:eq(0)").addClass("panel-item-active");
-                $(".panel-item-item:eq(4)").addClass("panel-item-active");
-                $(".specpanel-mask").show();
-                $(".specpanel-root").show();
-                $(".specpanel-root").animate({"height":"146.666667vw"},200);
+                if($(event.currentTarget).prev().text()!="1"){
+                    $("#shoptab").css("zIndex",2);
+                    $(".panel-item-active").removeClass("panel-item-active");
+                    $(".panel-item-item:eq(0)").addClass("panel-item-active");
+                    $(".panel-item-item:eq(4)").addClass("panel-item-active");
+                    $(".cartview-cartview").hide();
+                    $(".specpanel-mask").show();
+                    $(".specpanel-root").show();
+                    $(".specpanel-root").animate({"height":"146.666667vw"},200);
+                }
             }else{
                 var number=$(event.currentTarget).siblings(".cartbutton-entityquantity").text();
                 if(number==""){
+                    if($(event.currentTarget).parent().siblings(".cartbutton-minPurchase").text()!=""){
+                        $(event.currentTarget).parent().siblings(".cartbutton-minPurchase").hide();
+                    }
                     $(event.currentTarget).siblings(".cartbutton-entityquantity").text("1");
                     $(event.currentTarget).parent().children("a:eq(0)").show();
+                    $(event.currentTarget).parent().children("span").show();
                 }else{
                     $(event.currentTarget).siblings(".cartbutton-entityquantity").text(parseInt(number)+1);
                 }
+                var key=$(event.currentTarget).parent().parent().parent().siblings(".fooddetails-name").children(".fooddetails-nameText").text();
+                var obj={name:key};
+                var number=$(event.currentTarget).siblings(".cartbutton-entityquantity").text();
+                var price=$(event.currentTarget).parent().parent().parent().siblings(".salesInfo-price").children("span").text();
+                obj["price"]=(parseFloat(price)*parseInt(number)).toFixed(1);
+                obj["number"]=number;
+                this.bus.$emit("add_dish",key,obj);
+                this.bus.$emit("update_dish");
             }
         },
         minus(event){
             var number=$(event.currentTarget).siblings(".cartbutton-entityquantity").text();
             if(number=="1"){
+                if($(event.currentTarget).parent().siblings(".cartbutton-minPurchase").text()!=""){
+                    $(event.currentTarget).parent().siblings(".cartbutton-minPurchase").show();
+                }
                 $(event.currentTarget).siblings(".cartbutton-entityquantity").text("");
                 $(event.currentTarget).parent().children("a:eq(0)").hide();
+                $(event.currentTarget).parent().children("span").hide();
             }else{
                 $(event.currentTarget).siblings(".cartbutton-entityquantity").text(parseInt(number)-1);
+            }
+            var key=$(event.currentTarget).parent().parent().parent().siblings(".fooddetails-name").children(".fooddetails-nameText").text();
+            var obj={name:key};
+            var number=$(event.currentTarget).siblings(".cartbutton-entityquantity").text();
+            var price=$(event.currentTarget).parent().parent().parent().siblings(".salesInfo-price").children("span").text();
+            obj["price"]=(parseFloat(price)*parseInt(number)).toFixed(1);
+            obj["number"]=number;
+            if(number==0||key=="辣度选择"){
+                this.bus.$emit("del_dish",key);
+                this.bus.$emit("update_dish");
+            }else{
+                this.bus.$emit("add_dish",key,obj);
+                this.bus.$emit("update_dish");
             }
         }
     }

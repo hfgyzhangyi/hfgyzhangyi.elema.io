@@ -4,17 +4,21 @@ import router from './router'
 import MintUI from 'mint-ui'
 import axios from 'axios'
 import Vuex from 'vuex'
+import bus from './bus'
 import 'mint-ui/lib/style.css'
 import './assets/css/global.css'
 import './assets/css/my-mint.css'
 import './assets/js/global.js'
 import MyLi1 from '@/components/MyLi1'
+import DetailBottom from '@/components/DetailBottom'
 
 Vue.use(MintUI);
 Vue.use(Vuex);
 Vue.config.productionTip = false
 Vue.prototype.$axios=axios;
+Vue.prototype.bus=bus;
 Vue.component(MyLi1.name,MyLi1);
+Vue.component(DetailBottom.name,DetailBottom);
 var store=new Vuex.Store({
   state:{
     navTabSelected:"首页"
