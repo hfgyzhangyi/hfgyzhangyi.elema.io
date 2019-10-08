@@ -46,12 +46,17 @@ export default {
             var count1=0;
             var total=0;
             var flag=false;
+            var mustItems=this.checkMustSelectItems();
+            var countMustItems=0;
             for(var key in this.dishes){
                 count1++;
                 total+=parseFloat(this.dishes[key].price);
-                if(key=="辣度选择"){
-                    flag=true;
+                if(mustItems.indexOf(key)>=0){
+                    countMustItems++;
                 }
+            }
+            if(mustItems.length==0||mustItems.length==countMustItems){
+                flag=true;
             }
             total=total.toFixed(1);
             //判断总价与最低配送价格的关系
@@ -70,13 +75,14 @@ export default {
                 }
             }else{
                 $(".discount-tip-discountTip").children("span:eq(0)").text("");
-                $(".discount-tip-discountTip").children("span:eq(1)").text("可以提交订单");
                 $(".discount-tip-discountTip").children("span:eq(2)").text("");
                 //判断必选项辣度选择是否存在
                 if(flag){
+                    $(".discount-tip-discountTip").children("span:eq(1)").text("可以提交订单");
                     $(".submit-btn-submitbutton").children("small").text("去结算");
                     $(".submit-btn-submitbutton").removeClass("submit-btn-disabled");
                 }else{
+                    $(".discount-tip-discountTip").children("span:eq(1)").text("请选必选品");
                     $(".submit-btn-submitbutton").children("small").text("下单前请选必选品");
                     $(".submit-btn-submitbutton").addClass("submit-btn-disabled");
                 }
@@ -102,6 +108,16 @@ export default {
                 count2+=parseInt(this.dishes[k].number);
             }
             $(".bottomNav-carticon").children("span").text(count2);
+        },
+        checkMustSelectItems(){
+            var titles=$(".menucategory-categoryName");
+            for(var i=0;i<titles.length;i++){
+                if($(titles[i]).text().indexOf("必选品")>=0){
+                    var mustItems=$(titles[i]).text().slice($(titles[i]).text().indexOf("必选品")+4,-1).split(",");
+                    return mustItems;
+                }
+            }
+            return [];
         }
     }
 }
