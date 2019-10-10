@@ -341,6 +341,7 @@ export default {
             obj["info"]=$(".panel-item-active:eq(1)").text();
             obj["number"]=1;
             obj["price"]=0.2;
+            obj["must"]=true;
             $("#"+key).next().find(".cartbutton-entityquantity").prev().show();
             $("#"+key).next().find(".cartbutton-entityquantity").show();
             $("#"+key).next().find(".cartbutton-entityquantity").text(1);

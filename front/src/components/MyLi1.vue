@@ -115,7 +115,27 @@ export default {
                 this.bus.$emit("add_dish",key,obj);
                 this.bus.$emit("update_dish");
             }
+        },
+        doUpdate(name,number){
+            var names=$(".fooddetails-nameText");
+            for(var elem of names){
+                if($(elem).text()==name){
+                    $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").text(number);
+                    if(number==0){
+                        if($(elem).parent().siblings(".fooddetails-button").children(".cartbutton-minPurchase").text()!=""){
+                            $(elem).parent().siblings(".fooddetails-button").children(".cartbutton-minPurchase").show();
+                        }
+                        $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").text("");
+                        $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").prev().hide();
+                        $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").hide();
+                    }
+                    return;
+                }
+            }
         }
+    },
+    created(){
+        this.bus.$on("doUpdate_dish",this.doUpdate.bind(this));
     }
 }
 </script>
