@@ -77,7 +77,7 @@
 <script>
 export default {
     name:'detail-bottom',
-    props:["low_pay"],
+    props:["low_pay","store_id"],
     data(){
         return{
             dishes:{},
@@ -86,11 +86,44 @@ export default {
         }
     },
     created(){
+        this.bus.$on("init_dish",this.init.bind(this));
         this.bus.$on("add_dish",this.add.bind(this));
         this.bus.$on("del_dish",this.del.bind(this));
         this.bus.$on("update_dish",this.update.bind(this));
+        this.bus.$on("modifyBook",this.modifyDatabase.bind(this));
+    },
+    beforeDestroy(){
+        this.bus.$off("init_dish");
+        this.bus.$off("add_dish");
+        this.bus.$off("del_dish");
+        this.bus.$off("update_dish");
+        this.bus.$off("modifyBook");
     },
     methods:{
+        modifyDatabase(){
+            this.$axios.get("http://localhost:3000/book/modify?store_id="+this.store_id+"&dishes="+JSON.stringify(this.dishes)+"&phone_number="+window.sessionStorage.getItem("phone_number")).then(res=>{});
+        },
+        init(data){
+            for(var d of data){
+                var obj={};
+                if(d.info!=""&&d.name=="辣度选择"&&d.must==1){
+                    var spicy=$(".panel-item-active:eq(0)").text();
+                    obj={name:spicy};
+                    obj["info"]=$(".panel-item-active:eq(1)").text();
+                    obj["number"]=1;
+                    obj["price"]=0.2;
+                    obj["must"]=true;
+                    this.dishes["辣度选择"]=obj;
+                }else{
+                    obj["name"]=d.name;
+                    obj["price"]=(parseFloat(d.price)*parseInt(d.number)).toFixed(1);
+                    obj["number"]=parseInt(d.number);
+                    this.dishes[d.name]=obj;
+                }
+            }
+            this.packObjToArray();
+            this.update();
+        },
         add(key,dish){
             this.dishes[key]=dish;
             this.packObjToArray();
@@ -122,7 +155,7 @@ export default {
                 $(".discount-tip-discountTip").children("span:eq(1)").text((parseFloat(this.low_pay)-total).toFixed(1));
                 $(".discount-tip-discountTip").children("span:eq(2)").text("元起送");
                 $(".cartview-cartbody").show();
-                //判断必选项辣度选择是否存在
+                //判断必选项是否存在
                 if(flag){
                     $(".submit-btn-submitbutton").children("small").text("还差"+(parseFloat(this.low_pay)-total).toFixed(1)+"元起送");
                     $(".submit-btn-submitbutton").addClass("submit-btn-disabled");
@@ -131,9 +164,10 @@ export default {
                     $(".submit-btn-submitbutton").addClass("submit-btn-disabled");
                 }
             }else{
+                $(".cartview-cartbody").show();
                 $(".discount-tip-discountTip").children("span:eq(0)").text("");
                 $(".discount-tip-discountTip").children("span:eq(2)").text("");
-                //判断必选项辣度选择是否存在
+                //判断必选项是否存在
                 if(flag){
                     $(".discount-tip-discountTip").children("span:eq(1)").text("可以提交订单");
                     $(".submit-btn-submitbutton").children("small").text("去结算");
@@ -152,14 +186,20 @@ export default {
                 $(".bottomNav-carttotal").children("span").text("未选购商品");
                 $(".bottomNav-carttotal").children("span").addClass("bottomNav-carttotalOriginal");
             }
+            //获取dish总数
+            var count2=0;
+            for(var k in this.dishes){
+                count2+=parseInt(this.dishes[k].number);
+            }
+            $(".bottomNav-carticon").children("span").text(count2);
             //有dish并且小红圆点没有出现的场合
-            if($(".bottomNav-carticon").children("span").length==0&&count1==1){
-                $(".bottomNav-carticon").append($("<span>"+1+"</span>"));
+            if($(".bottomNav-carticon").children("span").length==0&&count1>=1){
+                $(".bottomNav-carticon").append($("<span>"+count2+"</span>"));
                 $(".bottomNav-carticon").addClass("bottomNav-carticon-change");
                 $(".bottomNav-carticon").removeClass("bottomNav-empty");
                 return;
             }
-            //有选择dish的场合
+            //没有选择dish的场合
             if(count1==0){
                 $(".bottomNav-carticon").children("span").remove();
                 $(".bottomNav-carticon").removeClass("bottomNav-carticon-change");
@@ -170,12 +210,6 @@ export default {
                 $(".cartview-cartbody").hide();
                 return;
             }
-            //获取dish总数
-            var count2=0;
-            for(var k in this.dishes){
-                count2+=parseInt(this.dishes[k].number);
-            }
-            $(".bottomNav-carticon").children("span").text(count2);
         },
         checkMustSelectItems(){
             var titles=$(".menucategory-categoryName");
@@ -239,6 +273,8 @@ export default {
             if(!$(".submit-btn-submitbutton").hasClass("submit-btn-disabled")){
                 if(window.sessionStorage.getItem("phone_number")==null){
                     this.$toast("请先登录");
+                }else{
+                    this.modifyDatabase();
                 }
             }
         },
@@ -253,18 +289,19 @@ export default {
             this.dishes={};
             this.dishes_arr=[];
             this.hasPackage=false;
+            this.bus.$emit("doUpdate_dish");
             $(".discount-tip-discountTip").children("span:eq(0)").text("还差");
             $(".discount-tip-discountTip").children("span:eq(1)").text(this.low_pay);
             $(".discount-tip-discountTip").children("span:eq(2)").text("元起送");
             $(".submit-btn-submitbutton").children("small").text("下单前请选必选品");
             $(".bottomNav-carttotal").children("span").text("未选购商品");
             $(".bottomNav-carttotal").children("span").addClass("bottomNav-carttotalOriginal");
+            $(".submit-btn-submitbutton").addClass("submit-btn-disabled");
         },
         plus(event){
             var name=$(event.currentTarget).parent().parent().siblings(".entityList-entityname").children(".entityList-name").text();
             var number=parseInt($(event.currentTarget).siblings(".cartbutton-entityquantity").text());
             if(!this.isSpicy(name)){
-                $(event.currentTarget).siblings(".cartbutton-entityquantity").text(number+1);
                 this.modifyDishesAndDishesArray(name,number+1);
                 this.bus.$emit("doUpdate_dish",name,number+1);
                 this.update();
@@ -275,13 +312,13 @@ export default {
             var number=parseInt($(event.currentTarget).siblings(".cartbutton-entityquantity").text());
             if(!this.isSpicy(name)){
                 if(number!=1){
-                    $(event.currentTarget).siblings(".cartbutton-entityquantity").text(number-1);
                     this.modifyDishesAndDishesArray(name,number-1);
                 }else{
                     delete this.dishes[name];
                     this.packObjToArray();
                 }
             }else{
+                name="辣度选择";
                 delete this.dishes["辣度选择"];
                 this.packObjToArray();
             }

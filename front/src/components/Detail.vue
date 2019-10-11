@@ -249,7 +249,7 @@
                     </section>
                 </div>
             </div>
-            <detail-bottom :low_pay="item.low_pay"></detail-bottom>
+            <detail-bottom :low_pay="item.low_pay" :store_id="item.id"></detail-bottom>
         </div>
   </div>
 </template>
@@ -261,7 +261,9 @@ export default {
             appraise_list:'',
             category_list:'',
             dishes_list:'',
-            store_id:0
+            store_id:0,
+            info_1:0,
+            info_2:0
         }
     },
     methods:{
@@ -370,12 +372,14 @@ export default {
     },
     beforeCreate(){
         this.store_id=this.$route.params.id;
+        //获取店铺信息
         this.$axios.get("http://localhost:3000/detail?id="+this.store_id).then(res=>{this.data=res.data});
         this.$axios.get("http://localhost:3000/appraise?store_id="+this.store_id).then(res=>{this.appraise_list=res.data});
         this.$axios.get("http://localhost:3000/detail/getCategory?store_id="+this.store_id).then(res=>this.category_list=res.data);
         this.$axios.get("http://localhost:3000/detail/getDishes?store_id="+this.store_id).then(res=>{
             this.dishes_list=res.data;
-            setTimeout(function(){
+            var store_id=this.$route.params.id;
+            setTimeout(()=>{
                 var inputs=$(".container").children("li").find("input[name=category]");
                 var temp_category="";
                 for(var i=0;i<inputs.length;i++){
@@ -400,6 +404,31 @@ export default {
     mounted(){
         setTimeout(()=>{
             $("#container").bind("scroll",this.scroll);
+            //获取待支付的订单所选取的dish,并设置到子组件
+            this.$axios.get("http://localhost:3000/book/arrearage?store_id="+this.$route.params.id+"&phone_number="+window.sessionStorage.getItem("phone_number")).then(res=>{
+                for(var d of res.data){
+                    if(d.info!=""&&d.name=="辣度选择"&&d.must==1){
+                        var infos=d.info.split("/");
+                        $(".panel-item-active").removeClass("panel-item-active");
+                        if(infos[0]=="0"){
+                            $(".specpanel-colBody:eq(0)").children(".panel-item-item:eq(0)").addClass("panel-item-active");
+                        }else if(infos[0]=="1"){
+                            $(".specpanel-colBody:eq(0)").children(".panel-item-item:eq(1)").addClass("panel-item-active");
+                        }else if(infos[0]=="2"){
+                            $(".specpanel-colBody:eq(0)").children(".panel-item-item:eq(2)").addClass("panel-item-active");
+                        }else{
+                            $(".specpanel-colBody:eq(0)").children(".panel-item-item:eq(3)").addClass("panel-item-active");
+                        }
+                        if(infos[1]=="0"){
+                            $(".specpanel-colBody:eq(1)").children(".panel-item-item:eq(0)").addClass("panel-item-active");
+                        }else if(infos[1]=="1"){
+                            $(".specpanel-colBody:eq(1)").children(".panel-item-item:eq(1)").addClass("panel-item-active");
+                        }
+                    }
+                }
+                this.bus.$emit("doInit_dish",res.data);
+                this.bus.$emit("init_dish",res.data);
+            });
         },150);
     }
 }

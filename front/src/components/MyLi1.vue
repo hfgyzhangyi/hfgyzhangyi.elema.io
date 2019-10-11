@@ -118,24 +118,58 @@ export default {
         },
         doUpdate(name,number){
             var names=$(".fooddetails-nameText");
-            for(var elem of names){
-                if($(elem).text()==name){
-                    $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").text(number);
-                    if(number==0){
-                        if($(elem).parent().siblings(".fooddetails-button").children(".cartbutton-minPurchase").text()!=""){
-                            $(elem).parent().siblings(".fooddetails-button").children(".cartbutton-minPurchase").show();
-                        }
-                        $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").text("");
-                        $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").prev().hide();
-                        $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").hide();
+            if(name==undefined&&number==undefined){
+                for(var elem of names){
+                    if($(elem).parent().siblings(".fooddetails-button").children(".cartbutton-minPurchase").text()!=""){
+                        $(elem).parent().siblings(".fooddetails-button").children(".cartbutton-minPurchase").show();
                     }
-                    return;
+                    $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").text("");
+                    $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").prev().hide();
+                    $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").hide();
+                }
+            }else{
+                for(var elem of names){
+                    if($(elem).text()==name){
+                        $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").text(number);
+                        if(number==0){
+                            if($(elem).parent().siblings(".fooddetails-button").children(".cartbutton-minPurchase").text()!=""){
+                                $(elem).parent().siblings(".fooddetails-button").children(".cartbutton-minPurchase").show();
+                            }
+                            $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").text("");
+                            $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").prev().hide();
+                            $(elem).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").hide();
+                        }
+                        return;
+                    }
+                }
+            }
+        },
+        init(data){
+            for(var d of data){
+                var names=$(".fooddetails-nameText");
+                for(var i=0;i<names.length;i++){
+                    if($(names[i]).text()==d.name){
+                        $(names[i]).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").text(d.number);
+                        $(names[i]).parent().siblings(".fooddetails-button").find(".cartbutton-entitybutton").children("a:eq(0)").show();
+                        $(names[i]).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").show();
+                    }else if($(names[i]).text()=="辣度选择"){
+                        if(d.name=="不辣！不辣！"||d.name=="微辣！微辣！"||d.name=="中辣！中辣！"||d.name=="重辣！重辣！"){
+                            $(names[i]).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").text(d.number);
+                            $(names[i]).parent().siblings(".fooddetails-button").find(".cartbutton-entitybutton").children("a:eq(0)").show();
+                            $(names[i]).parent().siblings(".fooddetails-button").find(".cartbutton-entityquantity").show();
+                        }
+                    }
                 }
             }
         }
     },
     created(){
         this.bus.$on("doUpdate_dish",this.doUpdate.bind(this));
+        this.bus.$on("doInit_dish",this.init.bind(this));
+    },
+    beforeDestroy(){
+        this.bus.$off("doUpdate_dish");
+        this.bus.$off("doInit_dish");
     }
 }
 </script>

@@ -578,11 +578,23 @@ export default {
         }
     },
     beforeMount(){
-        if(!this.isShow){
-            this.$axios.get("http://localhost:3000/storeList?big_category=美食").then(res=>{
-                this.storeList=res.data;
-            });
-        }
+        this.$axios.get("http://localhost:3000/storeList?big_category=美食").then(res=>{
+            this.storeList=res.data;
+            for(var i=0;i<this.storeList.length;i++){
+                this.$axios.get("http://localhost:3000/book?store_id="+this.storeList[i].id+"&phone_number="+window.sessionStorage.getItem("phone_number")).then(res=>{
+                    var number=parseInt(res.data.number);
+                    var store_id=parseInt(res.data.store_id);
+                    if(number>0){
+                        var inputs=$("input[name='id']");
+                        for(var input of inputs){
+                            if($(input).val()==store_id){
+                                $(input).siblings(".shop-wrap-div1").children(".image-wrap").append("<span class='logo-categoryQuantity'>"+number+"</span>");
+                            }
+                        }
+                    }
+                });
+            }
+        });
     },
     created(){
         this.$axios.get("http://localhost:3000/category").then(res=>{
@@ -1029,6 +1041,7 @@ export default {
     width: 17.333333vw;
     height: 1.733333rem;
     height: 17.333333vw;
+    position: relative;
 }
 .main-wrap{
     display: -webkit-flex;
@@ -1404,5 +1417,25 @@ export default {
     background-color: #2395ff;
     border-color: #2395ff;
     color: #fff;
+}
+.image-wrap>>>.logo-categoryQuantity{
+    position: absolute;
+    right: -.186667rem;
+    right: -1.866667vw;
+    top: -.186667rem;
+    top: -1.866667vw;
+    color: #fff;
+    background-image: linear-gradient(-90deg,#ff7416,#ff3c15 98%);
+    border-radius: .2rem;
+    border-radius: 2vw;
+    font-size: .266667rem;
+    font-weight: 700;
+    text-align: center;
+    min-width: .373333rem;
+    min-width: 3.733333vw;
+    padding: 0 .106667rem;
+    padding: 0 1.066667vw;
+    line-height: .4rem;
+    line-height: 4vw;
 }
 </style>

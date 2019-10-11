@@ -28,7 +28,8 @@
                     <span class="div1_span1">"{{store_name}}"</span>
                 </p>
                 <ul>
-                    <li v-for="(store,i) of search_list" :key="i">
+                    <li v-for="(store,i) of search_list" :key="i" @click="selectShop($event)">
+                        <input type="hidden" :value="store.store_index" name="id"/>
                         <div class="shopitem-type">
                             <img class="shopitem-type-img" :src="require('../assets/images/search/'+store.short_pic)">
                             <div class="shopitem-type-div">
@@ -93,6 +94,9 @@ export default {
         },
         ajax_search(event){
             event.preventDefault();
+        },
+        selectShop(event){
+            this.$router.push({name:"Detail",params:{id:$(event.currentTarget).children("input[name='id']").val()}});
         }
     },
     watch:{
