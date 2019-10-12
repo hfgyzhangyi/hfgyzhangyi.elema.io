@@ -30,14 +30,44 @@ router.get("/arrearage",(req,res)=>{
 		res.send(result);
 	});
 });
-router.get("/modify",(req,res)=>{
+router.get("/modify",async (req,res)=>{
 	var dishes=JSON.parse(req.query.dishes);
 	var store_id=req.query.store_id;
 	var phone_number=req.query.phone_number;
 	var date=getDate();
 	var sql1="delete from book where store_id=? and state=? and phone_number=?";
 	var sql2="insert into book(name,number,must,info,price,store_id,phone_number,state,date) values(?,?,?,?,?,?,?,?,?)";
-	pool.query(sql1,[store_id,0,phone_number],(err,result)=>{
+	await query(sql1,[store_id,0,phone_number]);
+	for(var key in dishes){
+		var name=dishes[key].name;
+		var number=dishes[key].number;
+		var must=dishes[key].must==null?false:dishes[key].must;
+		var info="";
+		var price=(parseFloat(dishes[key].price)/parseInt(dishes[key].number)).toFixed(1);
+		var state=0;
+		if(must==true){
+			if(key=="辣度选择"){
+				if(name=="不辣！不辣！"){
+					info="0";
+				}else if(name=="微辣！微辣！"){
+					info="1";
+				}else if(name=="中辣！中辣！"){
+					info="2";
+				}else{
+					info="3";
+				}
+				if(dishes[key].info=="要餐具"){
+					info+="/0";
+				}else{
+					info+="/1";
+				}
+				name=key;
+			}
+		}
+		await query(sql2,[name,number,must,info,price,store_id,phone_number,state,date]);
+	}
+	res.send("ok");
+	/*pool.query(sql1,[store_id,0,phone_number],(err,result)=>{
 		for(var key in dishes){
 			var name=dishes[key].name;
 			var number=dishes[key].number;
@@ -68,6 +98,24 @@ router.get("/modify",(req,res)=>{
 				return;
 			});
 		}
-	});
+	});*/
 });
+let query=function(sql,values){
+  return new Promise((resolve,reject)=>{
+    pool.getConnection(function(err,connection){
+      if(err){
+        reject(err);
+      }else{
+        connection.query(sql,values,(err,rows)=>{
+          if(err){
+            reject(err);
+          }else{
+            resolve(rows);
+          }
+          connection.release();
+        });
+      }
+    });
+  });
+};
 module.exports=router;

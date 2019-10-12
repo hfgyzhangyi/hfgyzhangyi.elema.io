@@ -101,7 +101,7 @@ export default {
     },
     methods:{
         modifyDatabase(){
-            this.$axios.get("http://localhost:3000/book/modify?store_id="+this.store_id+"&dishes="+JSON.stringify(this.dishes)+"&phone_number="+window.sessionStorage.getItem("phone_number")).then(res=>{});
+            this.$axios.get("http://localhost:3000/book/modify?store_id="+this.store_id+"&dishes="+JSON.stringify(this.dishes)+"&phone_number="+window.sessionStorage.getItem("phone_number")).then(res=>{console.log(res.data)});
         },
         init(data){
             for(var d of data){
@@ -275,6 +275,8 @@ export default {
                     this.$toast("请先登录");
                 }else{
                     this.modifyDatabase();
+                    window.sessionStorage.setItem("store_id",this.store_id);
+                    this.$router.push({name:"Pay",params:{id:this.store_id}});
                 }
             }
         },

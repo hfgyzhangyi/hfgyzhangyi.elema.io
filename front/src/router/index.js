@@ -10,6 +10,7 @@ import Login from '@/components/Login'
 import Search from '@/components/Search'
 import FoodList from '@/components/FoodList'
 import Detail from '@/components/Detail'
+import Pay from '@/components/Pay'
 
 Vue.use(Router)
 const originalPush=Router.prototype.push;
@@ -87,6 +88,11 @@ export default new Router({
       path: '/Detail',
       name: 'Detail',
       component: Detail
+    },
+    {
+      path: '/Pay',
+      name: 'Pay',
+      component: Pay
     }
   ]
 })
