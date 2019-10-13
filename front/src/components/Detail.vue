@@ -371,7 +371,7 @@ export default {
         }
     },
     beforeCreate(){
-        this.store_id=this.$route.params.id;
+        this.store_id=this.$route.params.id==undefined?window.sessionStorage.getItem("store_id"):this.$route.params.id;
         //获取店铺信息
         this.$axios.get("http://localhost:3000/detail?id="+this.store_id).then(res=>{this.data=res.data});
         this.$axios.get("http://localhost:3000/appraise?store_id="+this.store_id).then(res=>{this.appraise_list=res.data});

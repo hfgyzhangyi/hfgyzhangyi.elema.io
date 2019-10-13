@@ -558,6 +558,7 @@ export default {
         toDetail(event){
             var id=$(event.currentTarget).children("input[type='hidden']").val();
             if(id==5){
+                window.sessionStorage.setItem("store_id",id);
                 this.$router.push({name:"Detail",params:{id:id}});
             }
         }
@@ -576,9 +577,6 @@ export default {
                 $(".filtermodal").hide();
             }
         }
-        window.addEventListener("popstate",()=>{ 
-            this.$router.push({name:"Home"});
-        },false);
     },
     beforeMount(){
         this.$axios.get("http://localhost:3000/storeList?big_category=美食").then(res=>{
