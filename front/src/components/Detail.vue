@@ -268,7 +268,7 @@ export default {
     },
     methods:{
         back(){
-            history.go(-1);
+            this.$router.push({name:"FoodList"});
         },
         clickShopTab(event){
             var index1=$(event.currentTarget).index();

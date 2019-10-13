@@ -576,6 +576,9 @@ export default {
                 $(".filtermodal").hide();
             }
         }
+        window.addEventListener("popstate",()=>{ 
+            this.$router.push({name:"Home"});
+        },false);
     },
     beforeMount(){
         this.$axios.get("http://localhost:3000/storeList?big_category=美食").then(res=>{

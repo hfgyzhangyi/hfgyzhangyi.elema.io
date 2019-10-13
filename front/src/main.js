@@ -11,6 +11,7 @@ import './assets/css/my-mint.css'
 import './assets/js/global.js'
 import MyLi1 from '@/components/MyLi1'
 import DetailBottom from '@/components/DetailBottom'
+import {MessageBox} from 'mint-ui'
 
 Vue.use(MintUI);
 Vue.use(Vuex);
@@ -19,6 +20,7 @@ Vue.prototype.$axios=axios;
 Vue.prototype.bus=bus;
 Vue.component(MyLi1.name,MyLi1);
 Vue.component(DetailBottom.name,DetailBottom);
+Vue.component(MessageBox.name,MessageBox);
 var store=new Vuex.Store({
   state:{
     navTabSelected:"首页"

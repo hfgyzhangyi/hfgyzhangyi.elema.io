@@ -681,6 +681,7 @@ export default {
         if(window.sessionStorage.getItem("position")!=null){
             $(".span1").text(window.sessionStorage.getItem("position"));
         }
+        $(".is-selected").removeClass("is-selected");
         if(window.sessionStorage.getItem("navTabIndex")=="首页"){
             $(".mint-tab-item:eq(0)").find("img").attr("src",require("../assets/images/Tabber_1_2.png"));
             $(".mint-tab-item:eq(0)").addClass("is-selected");

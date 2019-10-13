@@ -190,7 +190,7 @@ export default {
 @media (max-width: 768px){
     .about_us{
         display: block;
-        font-size: 0.16rem;
+        font-size: 0.32rem;
     }
 }
 </style>
