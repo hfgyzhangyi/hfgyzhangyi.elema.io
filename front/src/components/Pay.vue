@@ -63,7 +63,7 @@
                         </h3>
                         <ul class="cart-group-ul1">
                             <li v-for="(item,i) of book_list" :key="i">
-                                <img class="cart-group-ul1-img" src="../assets/images/detail/1.jpg">
+                                <img class="cart-group-ul1-img" :src="require('../assets/images/detail/'+item.pic_name)">
                                 <div class="cart-group-ul1-div">
                                     <p class="cart-group-ul1-p">{{item.name}}</p>
                                 </div>

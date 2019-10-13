@@ -38,21 +38,24 @@ router.get("/arrearage",(req,res)=>{
 		res.send(result);
 	});
 });
-router.get("/payInit",(req,res)=>{
-	var sql="select * from book where store_id=? and state=? and phone_number=?";
+router.get("/payInit",async (req,res)=>{
+	var sql1="select * from book where store_id=? and state=? and phone_number=?";
+	var sql2="select pic_name from dishes where store_id=? and name=?";
 	var store_id=req.query.store_id;
 	var phone_number=req.query.phone_number;
 	var time=getDateAdd();
 	var total=0;
-	pool.query(sql,[store_id,0,phone_number],(err,result)=>{
-		for(var i=result.length-1;i>=0;i--){
-			total+=parseFloat(result[i].price)*parseInt(result[i].number);
-			if(result[i].name=="辣度选择"){
-				result.splice(i,1);
-			}
+	var result1=await query(sql1,[store_id,0,phone_number]);
+	for(var i=result1.length-1;i>=0;i--){
+		total+=parseFloat(result1[i].price)*parseInt(result1[i].number);
+		if(result1[i].name=="辣度选择"){
+			result1.splice(i,1);
+		}else{
+			var result2=await query(sql2,[store_id,result1[i].name]);
+			result1[i]["pic_name"]=result2[0]["pic_name"];
 		}
-		res.send({"data":result,"time":time,"total":total});
-	});
+	}
+	res.send({"data":result1,"time":time,"total":total});
 });
 router.get("/pay",(req,res)=>{
 	var sql="update book set state=?,date=? where store_id=? and state=? and phone_number=?";
