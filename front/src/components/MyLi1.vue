@@ -73,8 +73,10 @@ export default {
                 if(number==""){
                     if($(event.currentTarget).parent().siblings(".cartbutton-minPurchase").text()!=""){
                         $(event.currentTarget).parent().siblings(".cartbutton-minPurchase").hide();
+                        $(event.currentTarget).siblings(".cartbutton-entityquantity").text(this.low_number);
+                    }else{
+                        $(event.currentTarget).siblings(".cartbutton-entityquantity").text("1");
                     }
-                    $(event.currentTarget).siblings(".cartbutton-entityquantity").text("1");
                     $(event.currentTarget).parent().children("a:eq(0)").show();
                     $(event.currentTarget).parent().children("span").show();
                 }else{
@@ -92,7 +94,7 @@ export default {
         },
         minus(event){
             var number=$(event.currentTarget).siblings(".cartbutton-entityquantity").text();
-            if(number=="1"){
+            if(number=="1"||number==this.low_number){
                 if($(event.currentTarget).parent().siblings(".cartbutton-minPurchase").text()!=""){
                     $(event.currentTarget).parent().siblings(".cartbutton-minPurchase").show();
                 }

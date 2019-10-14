@@ -6,6 +6,9 @@
                 <h3>登录后查看外卖订单</h3>
                 <button @click="login()">立即登录</button>
             </section>
+            <ul v-if="!isShow">
+                <my-li-2 v-for="(item,i) of book_list" :key="i" :index="i" :total="item.total" :count="item.count" :time="item.time" :name="item.name" :shop_name="item.shop_name" :pic_name="item.pic_name"></my-li-2>
+            </ul>
             <div class="mb"></div>
         </div>
     </div>
@@ -14,17 +17,32 @@
 export default {
     data(){
         return{
-            isShow:true
+            isShow:true,
+            book_list:''
         }
     },
     methods:{
         login(){
             this.$router.push({name:"Login"});
+        },
+        delete_book(index){
+            this.$messagebox({title:"提示",message:"是否删除?",showConfirmButton:true,showCancelButton:true}).then(action=>{
+                if(action=="confirm"){
+                    this.book_list.splice(index,1);
+                }
+            });
         }
     },
+    beforeDestroy(){
+        this.bus.$off("delete_book");
+    },
     created(){
+        this.bus.$on("delete_book",this.delete_book.bind(this));
         if(window.sessionStorage.getItem("phone_number")!=null){
             this.isShow=false;
+            this.$axios.get("http://localhost:3000/book/getBookList?pageNow=1&phone_number="+window.sessionStorage.getItem("phone_number")).then(res=>{
+                this.book_list=res.data;
+            });
         }else{
             this.isShow=true;
         }

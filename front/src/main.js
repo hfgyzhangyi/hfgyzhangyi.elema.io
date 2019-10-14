@@ -10,8 +10,9 @@ import './assets/css/global.css'
 import './assets/css/my-mint.css'
 import './assets/js/global.js'
 import MyLi1 from '@/components/MyLi1'
+import MyLi2 from '@/components/MyLi2'
 import DetailBottom from '@/components/DetailBottom'
-import {MessageBox} from 'mint-ui'
+import {MessageBox,Loadmore} from 'mint-ui'
 
 Vue.use(MintUI);
 Vue.use(Vuex);
@@ -19,8 +20,10 @@ Vue.config.productionTip = false
 Vue.prototype.$axios=axios;
 Vue.prototype.bus=bus;
 Vue.component(MyLi1.name,MyLi1);
+Vue.component(MyLi2.name,MyLi2);
 Vue.component(DetailBottom.name,DetailBottom);
 Vue.component(MessageBox.name,MessageBox);
+Vue.component(Loadmore.name,Loadmore);
 var store=new Vuex.Store({
   state:{
     navTabSelected:"首页"

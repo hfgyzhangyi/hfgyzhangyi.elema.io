@@ -1,5 +1,6 @@
 const pool=require("../pool.js");
 const express=require("express");
+const PAGESIZE=5;
 var router=express.Router();
 function getDate(){
 	var date=new Date();
@@ -7,9 +8,9 @@ function getDate(){
 	date_str+=date.getFullYear()+"-";
 	date_str+=(date.getMonth()+1)+"-";
 	date_str+=date.getDate()+" ";
-	date_str+=date.getHours()+":";
-	date_str+=date.getMinutes()+":";
-	date_str+=date.getSeconds();
+	date_str+=(date.getHours()<10?"0"+date.getHours():date.getHours())+":";
+	date_str+=(date.getMinutes()<10?"0"+date.getMinutes():date.getMinutes())+":";
+	date_str+=date.getSeconds()<10?"0"+date.getSeconds():date.getSeconds();
 	return date_str;
 }
 function getDateAdd(){
@@ -65,6 +66,48 @@ router.get("/pay",(req,res)=>{
 	pool.query(sql,[1,date,store_id,0,phone_number],(err,result)=>{
 		res.send("ok");
 	});
+});
+router.get("/getBookList",async (req,res)=>{
+	var sql1="select distinct date from book where phone_number=? and state=? order by date desc";
+	var phone_number=req.query.phone_number;
+	var pageNow=req.query.pageNow;
+	var result1=await query(sql1,[phone_number,1]);
+	var dates=[];
+	var response=[];
+	for(var date of result1){
+		dates.push(date["date"]);
+	}
+	var sql2="select * from book where phone_number=? and date=? and state=?";
+	for(var date of dates){
+		var result2=await query(sql2,[phone_number,date,1]);
+		var name="";
+		var name_arr=[];
+		var total=0;
+		var count=0;
+		var store_id=0;
+		var obj={};
+		for(var data of result2){
+			if(data.name!="辣度选择"){
+				count+=data.number;
+				name_arr.push(data.name);
+			}
+			total+=parseFloat(data.price)*parseFloat(data.number);
+			if(store_id==0){
+				store_id=data.store_id;
+			}
+		}
+		var sql3="select * from search_store where store_index=?";
+		var result3=await query(sql3,[store_id]);
+		obj["count"]=count;
+		obj["name"]=name_arr.join(",");
+		obj["time"]=date;
+		obj["total"]=total.toFixed(1);
+		obj["pic_name"]=result3[0].short_pic;
+		obj["shop_name"]=result3[0].store_name;
+		obj["store_id"]=store_id;
+		response.push(obj);
+	}
+	res.send(response);
 });
 router.get("/modify",async (req,res)=>{
 	var dishes=JSON.parse(req.query.dishes);
