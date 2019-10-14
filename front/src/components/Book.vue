@@ -7,7 +7,7 @@
                 <button @click="login()">立即登录</button>
             </section>
             <ul v-if="!isShow">
-                <my-li-2 v-for="(item,i) of book_list" :key="i" :index="i" :total="item.total" :count="item.count" :time="item.time" :name="item.name" :shop_name="item.shop_name" :pic_name="item.pic_name"></my-li-2>
+                <my-li-2 @del="delete_book()" v-for="(item,i) of book_list" :key="i" :index="i" :total="item.total" :count="item.count" :time="item.time" :name="item.name" :shop_name="item.shop_name" :pic_name="item.pic_name"></my-li-2>
             </ul>
             <div class="mb"></div>
         </div>
@@ -34,10 +34,10 @@ export default {
         }
     },
     beforeDestroy(){
-        this.bus.$off("delete_book");
+        //this.bus.$off("delete_book");
     },
     created(){
-        this.bus.$on("delete_book",this.delete_book.bind(this));
+        //this.bus.$on("delete_book",this.delete_book.bind(this));
         if(window.sessionStorage.getItem("phone_number")!=null){
             this.isShow=false;
             this.$axios.get("http://localhost:3000/book/getBookList?pageNow=1&phone_number="+window.sessionStorage.getItem("phone_number")).then(res=>{
@@ -115,7 +115,7 @@ export default {
     background-color: #56d176;
     color: #fff;
     text-align: center;
-    font-size: 0.2rem;
+    font-size: 0.4rem;
     font-family: inherit;
 }
 </style>

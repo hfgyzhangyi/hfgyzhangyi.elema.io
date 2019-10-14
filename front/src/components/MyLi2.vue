@@ -43,7 +43,7 @@ export default {
     props:["total","count","time","name","shop_name",'pic_name','index'],
     methods:{
         del(event){
-            this.bus.$emit("delete_book",$(event.currentTarget).parent().siblings("input[name='index']").val());
+            this.$emit("del",$(event.currentTarget).parent().siblings("input[name='index']").val());
         }
     }
 }
