@@ -25,7 +25,7 @@ router.get("/",(req,res)=>{
 	var store_id=req.query.store_id;
 	var phone_number=req.query.phone_number;
 	var sql="select sum(number) as count,store_id from book where store_id=? and state=? and phone_number=?";
-	pool.query(sql,[store_id,0,phone_number],(err,result)=>{
+	pool.query(sql,[store_id,2,phone_number],(err,result)=>{
 		var number=result[0]["count"];
 		var store_id=result[0]["store_id"];
 		res.send({number:number,store_id:store_id});
@@ -35,7 +35,7 @@ router.get("/arrearage",(req,res)=>{
 	var store_id=req.query.store_id;
 	var phone_number=req.query.phone_number;
 	var sql="select * from book where store_id=? and state=? and phone_number=?";
-	pool.query(sql,[store_id,0,phone_number],(err,result)=>{
+	pool.query(sql,[store_id,2,phone_number],(err,result)=>{
 		res.send(result);
 	});
 });
@@ -46,7 +46,7 @@ router.get("/payInit",async (req,res)=>{
 	var phone_number=req.query.phone_number;
 	var time=getDateAdd();
 	var total=0;
-	var result1=await query(sql1,[store_id,0,phone_number]);
+	var result1=await query(sql1,[store_id,2,phone_number]);
 	for(var i=result1.length-1;i>=0;i--){
 		total+=parseFloat(result1[i].price)*parseInt(result1[i].number);
 		if(result1[i].name=="辣度选择"){
@@ -63,7 +63,7 @@ router.get("/pay",(req,res)=>{
 	var store_id=req.query.store_id;
 	var phone_number=req.query.phone_number;
 	var date=getDate();
-	pool.query(sql,[1,date,store_id,0,phone_number],(err,result)=>{
+	pool.query(sql,[1,date,store_id,2,phone_number],(err,result)=>{
 		res.send("ok");
 	});
 });
@@ -116,14 +116,14 @@ router.get("/modify",async (req,res)=>{
 	var date=getDate();
 	var sql1="delete from book where store_id=? and state=? and phone_number=?";
 	var sql2="insert into book(name,number,must,info,price,store_id,phone_number,state,date) values(?,?,?,?,?,?,?,?,?)";
-	await query(sql1,[store_id,0,phone_number]);
+	await query(sql1,[store_id,2,phone_number]);
 	for(var key in dishes){
 		var name=dishes[key].name;
 		var number=dishes[key].number;
 		var must=dishes[key].must==null?false:dishes[key].must;
 		var info="";
 		var price=(parseFloat(dishes[key].price)/parseInt(dishes[key].number)).toFixed(1);
-		var state=0;
+		var state=2;
 		if(must==true){
 			if(key=="辣度选择"){
 				if(name=="不辣！不辣！"){

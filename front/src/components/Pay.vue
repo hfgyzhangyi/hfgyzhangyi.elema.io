@@ -58,7 +58,7 @@
                     </div>
                     <section class="checkout-section cart-group">
                         <h3 class="cart-group-h3">
-                            <span class="cart-group-h3-span1">粉煲仔</span>
+                            <span class="cart-group-h3-span1">串意十足烧烤店(江文路店)</span>
                             <span class="cart-group-h3-span2"></span>
                         </h3>
                         <ul class="cart-group-ul1">

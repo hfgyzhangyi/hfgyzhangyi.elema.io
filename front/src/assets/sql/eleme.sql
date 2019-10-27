@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-10-14 17:42:16
+Date: 2019-10-27 14:49:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,15 +58,15 @@ CREATE TABLE `book` (
   PRIMARY KEY (`id`),
   KEY `book_store_id` (`store_id`),
   CONSTRAINT `book_store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1046 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1058 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of book
 -- ----------------------------
-INSERT INTO `book` VALUES ('1', 'name1', '1', '0', '', '1.0', '1', '18221528042', '0', '2019-10-11 13:32:00');
-INSERT INTO `book` VALUES ('2', 'name2', '2', '0', '', '1.0', '2', '18221528042', '0', '2019-10-11 13:32:00');
-INSERT INTO `book` VALUES ('3', 'name3', '3', '0', '', '1.0', '3', '18221528042', '0', '2019-10-11 13:32:00');
-INSERT INTO `book` VALUES ('4', 'name4', '4', '0', '', '1.0', '4', '18221528042', '0', '2019-10-11 13:32:00');
+INSERT INTO `book` VALUES ('1', 'name1', '1', '0', '', '1.0', '1', '18221528042', '2', '2019-10-11 13:32:00');
+INSERT INTO `book` VALUES ('2', 'name2', '2', '0', '', '1.0', '2', '18221528042', '2', '2019-10-11 13:32:00');
+INSERT INTO `book` VALUES ('3', 'name3', '3', '0', '', '1.0', '3', '18221528042', '2', '2019-10-11 13:32:00');
+INSERT INTO `book` VALUES ('4', 'name4', '4', '0', '', '1.0', '4', '18221528042', '2', '2019-10-11 13:32:00');
 INSERT INTO `book` VALUES ('1030', '蟹肉棒', '3', '0', '', '0.0', '5', '18221528042', '1', '2019-10-14 16:45:03');
 INSERT INTO `book` VALUES ('1031', '土豆片', '3', '0', '', '0.0', '5', '18221528042', '1', '2019-10-14 16:45:03');
 INSERT INTO `book` VALUES ('1032', '千叶豆腐', '3', '0', '', '0.0', '5', '18221528042', '1', '2019-10-14 16:45:03');
@@ -83,6 +83,9 @@ INSERT INTO `book` VALUES ('1042', '秋刀鱼', '2', '0', '', '13.8', '5', '1822
 INSERT INTO `book` VALUES ('1043', '辣度选择', '1', '1', '0/0', '0.2', '5', '18221528042', '1', '2019-10-14 16:47:06');
 INSERT INTO `book` VALUES ('1044', '辣度选择', '1', '1', '0/0', '0.2', '5', '18221528042', '1', '2019-10-14 16:48:11');
 INSERT INTO `book` VALUES ('1045', '锡纸花甲粉丝', '1', '0', '', '34.0', '5', '18221528042', '1', '2019-10-14 16:48:11');
+INSERT INTO `book` VALUES ('1055', '辣度选择', '1', '1', '1/1', '0.2', '5', '18221528042', '2', '2019-10-27 14:45:34');
+INSERT INTO `book` VALUES ('1056', '金针菇', '3', '0', '', '2.5', '5', '18221528042', '2', '2019-10-27 14:45:34');
+INSERT INTO `book` VALUES ('1057', '韭菜', '3', '0', '', '3.0', '5', '18221528042', '2', '2019-10-27 14:45:34');
 
 -- ----------------------------
 -- Table structure for category
