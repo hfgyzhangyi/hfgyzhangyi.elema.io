@@ -552,7 +552,23 @@ export default {
             var index=$(event.currentTarget).parent().index()-1;
             var big_category=$(".main-menu").children(".menu-item:eq("+index+")").children(".menu-name").text();
             this.$axios.get("http://localhost:3000/storeList/getByCategory?category="+$(event.currentTarget).children(".menu-name").text()+"&big_category="+big_category).
-            then(res=>{this.storeList=res.data});
+            then(res=>{
+                this.storeList=res.data;
+                for(var i=0;i<this.storeList.length;i++){
+                    this.$axios.get("http://localhost:3000/book?store_id="+this.storeList[i].id+"&phone_number="+window.sessionStorage.getItem("phone_number")).then(res=>{
+                        var number=parseInt(res.data.number);
+                        var store_id=parseInt(res.data.store_id);
+                        if(number>0){
+                            var inputs=$("input[name='id']");
+                            for(var input of inputs){
+                                if($(input).val()==store_id){
+                                    $(input).siblings(".shop-wrap-div1").children(".image-wrap").append("<span class='logo-categoryQuantity'>"+number+"</span>");
+                                }
+                            }
+                        }
+                    });
+                }
+            });
             document.documentElement.style.overflow='scroll';
         },
         toDetail(event){
