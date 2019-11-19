@@ -580,17 +580,12 @@ export default {
         }
     },
     mounted(){
-        this.bodyClickListener=(e)=>{
-            //如果$(".filter-sort")是open状态
-            if($(".filter-sort").hasClass("open")){
-                $(".filter-sort").removeClass("open");
-                $(".filter-nav:eq(0)").removeClass("open");
-                $(".filtermodal").hide();
+        window.onpopstate=(e)=>{
+            if(window.location=="http://localhost:8080/Detail"){
+                this.$router.push({name:"Home"});
             }
-            if($(".filter-more").hasClass("open")&&!$(e.target).isChildAndSelfOf(".filter-more")){
-                $(".filter-more").removeClass("open");
-                $(".filter-nav-more").removeClass("open");
-                $(".filtermodal").hide();
+            if(window.location=="http://localhost:8080/FoodList"){
+                this.$router.push({name:"Home"});
             }
         }
     },
