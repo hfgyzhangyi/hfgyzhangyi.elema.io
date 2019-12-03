@@ -2,7 +2,7 @@
     <div class="tmpl">
         <div class="app">
             <div class="login-header">
-                <img src="../assets/images/login/1.png"/>
+                <p>美食汇</p>
             </div>
             <div>
                 <form class="messageLogin">
@@ -117,8 +117,9 @@ export default {
 .login-header{
     text-align: center;
 }
-.login-header img{
-    height: 56px;
+.login-header p{
+    height: 40px;
+    color: #2395FF;
 }
 .messageLogin{
     margin-top: 16px;

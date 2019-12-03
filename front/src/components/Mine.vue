@@ -130,7 +130,7 @@
                         </svg>
                     </aside>
                     <div class="index_3_div1">
-                        下载饿了么APP
+                        下载美食汇APP
                         <span class="index_3_span1">
                             <svg>
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
